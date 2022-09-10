@@ -177,8 +177,8 @@
                 @endif
                 </a>
                 <div>
-                <span id="like-count{{$feel->id}}" style="margin-left: 3px;margin-right: 3px;font-size: 12px;color: rgb(197, 87, 84);width: fit-content;display: inline-flex;">@if($feel->likes_count > 0) {{$feel->likes_count}} <p style="margin: 0px 5px;">{{__('messages.like')}}</p> |@endif</span> 
-                <span style="margin-left: -2px;margin-right: 3px;font-size: 12px;color: rgb(197, 87, 84);width: fit-content;display: inline-flex;">@if($feel->comments_count > 0) {{$feel->comments_count}} <p style="margin: 0px 5px;">{{__('messages.comment')}}</p> @endif</span>
+                <span id="like-count{{$feel->id}}" style="margin-left: 3px;margin-right: 3px;font-size: 12px;color: rgb(197, 87, 84);width: fit-content;display: inline-flex;">@if($feel->likes_count > 0) {{$feel->likes_count}} <p style="margin: 0px 5px;">{{__('messages.like')}}</p>@endif</span> 
+                <span style="margin-left: -2px;margin-right: 3px;font-size: 12px;color: rgb(197, 87, 84);width: fit-content;display: inline-flex;">@if($feel->comments_count > 0) {{$feel->comments_count}} <p style="margin: 0px 5px;"> | {{__('messages.comment')}}</p> @endif</span>
                 </div>
                 @can('delete', $feel)
                 <div class="row likecommentshare" style="margin-bottom: 23px;">
@@ -279,7 +279,7 @@
                 var count = $(this).data('count');
                 count +=1;
                 var id = $(this).attr('data-id');
-                $("#like-count" + id).html(count + "<p style='margin: 0px 5px;''>{{__('messages.like')}}</p> |");
+                $("#like-count" + id).html(count + "<p style='margin: 0px 5px;''>{{__('messages.like')}}</p>");
                 $(this).attr('data-count', count); 
                 $("#dislike" + id).attr('data-count', count);
                 $(this).css('display', 'none');
@@ -305,7 +305,7 @@
             $(".dislike").on("click", function(){
                 var count = $(this).data('count');
                 count -=1;
-                var txt = "<p style='margin: 0px 5px;''>{{__('messages.like')}}</p> |";
+                var txt = "<p style='margin: 0px 5px;''>{{__('messages.like')}}</p>";
                 if(count == 0)
                     count = "";
                     txt = "";
