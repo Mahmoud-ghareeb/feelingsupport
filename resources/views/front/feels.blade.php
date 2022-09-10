@@ -178,7 +178,7 @@
                 </a>
                 <div>
                 <span id="like-count{{$feel->id}}" style="margin-left: 3px;margin-right: 3px;font-size: 12px;color: rgb(197, 87, 84);width: fit-content;display: inline-flex;">@if($feel->likes_count > 0) {{$feel->likes_count}} <p style="margin: 0px 5px;">{{__('messages.like')}}</p>@endif</span> 
-                <span style="margin-left: -2px;margin-right: 3px;font-size: 12px;color: rgb(197, 87, 84);width: fit-content;display: inline-flex;">@if($feel->comments_count > 0) {{$feel->comments_count}} <p style="margin: 0px 5px;"> | {{__('messages.comment')}}</p> @endif</span>
+                <span style="margin-left: -2px;margin-right: 3px;font-size: 12px;color: rgb(197, 87, 84);width: fit-content;display: inline-flex;">@if($feel->comments_count > 0) {{$feel->comments_count}} <p style="margin: 0px 5px;">{{__('messages.comment')}}</p> @endif</span>
                 </div>
                 @can('delete', $feel)
                 <div class="row likecommentshare" style="margin-bottom: 23px;">
