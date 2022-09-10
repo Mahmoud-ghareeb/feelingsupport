@@ -307,8 +307,11 @@
                 count -=1;
                 var txt = "<p style='margin: 0px 5px;''>{{__('messages.like')}}</p>";
                 if(count == 0)
+                {
                     count = "";
                     txt = "";
+                }
+                    
                 var id = $(this).attr('data-id');
                 $("#like-count" + id).html(count + txt);
                 $(this).attr('data-count', count); 
