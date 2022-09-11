@@ -178,6 +178,9 @@
                 </a>
                 <div>
                 <span id="like-count{{$feel->id}}" style="margin-left: 3px;margin-right: 3px;font-size: 12px;color: rgb(197, 87, 84);width: fit-content;display: inline-flex;">@if($feel->likes_count > 0) {{$feel->likes_count}} <p style="margin: 0px 5px;">{{__('messages.like')}}</p>@endif</span> 
+                @if(($feel->likes_count > 0) and ($feel->comments_count > 0))
+                    <span style="margin: 0px 2px 0px -7px;color: rgb(197, 87, 84);">|</span>
+                @endif
                 <span style="margin-left: -2px;margin-right: -2px;font-size: 12px;color: rgb(197, 87, 84);width: fit-content;display: inline-flex;">@if($feel->comments_count > 0) {{$feel->comments_count}} <p style="margin: 0px 5px;">{{__('messages.comment')}}</p> @endif</span>
                 </div>
                 @can('delete', $feel)

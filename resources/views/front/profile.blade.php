@@ -9,7 +9,7 @@
         <div class="col-md-8" style="margin-top: 30px;">
             <div class="card" style="border-radius: 39px;margin-top: 38px;">
                 <div style="border-radius: 100px;height: 150px;width: 150px;position: relative;margin: auto;top: -60px;">
-                    <img src="{{asset($user->picture)}}" style="padding: 5px;" height="150" width="150">
+                    <img src="{{asset($user->picture)}}" style="padding: 5px;border-radius: 50%;" height="150" width="150">
                     
                 </div>
                 <div style="margin-top: -50px;">
