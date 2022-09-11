@@ -96,17 +96,21 @@
                     <p class="mb-3" dir="auto" style="padding: 4px 2px;word-break: break-word;font-size: 15px;">{{$feel->reason}}</p>
                 @endif
                 </a>
-                <span id="like-count{{$feel->id}}" style="margin-left: 3px;margin-right: 3px;font-size: 12px;color: rgb(197, 87, 84);width: fit-content;display: inline-flex;">@if($feel->likes_count > 0) {{$feel->likes_count}} <p style="margin: 0px 5px;">{{__('messages.like')}}</p>@endif</span> 
-                @if(($feel->likes_count > 0) and ($feel->comments_count > 0))
-                    <span style="margin: 0px 2px 0px -7px;color: rgb(197, 87, 84);">|</span>
-                @endif
-                <span style="margin-left: -2px;margin-right: -2px;font-size: 12px;color: rgb(197, 87, 84);width: fit-content;display: inline-flex;">@if($feel->comments_count > 0) {{$feel->comments_count}} <p style="margin: 0px 5px;">{{__('messages.comment')}}</p> @endif</span>
-                
+                <div style="border-bottom: 1px solid rgb(240, 242, 245);">
+                    <span id="like-count{{$feel->id}}" style="margin-left: 3px;margin-right: 3px;vertical-align: bottom;font-size: 12px;color: rgb(197, 87, 84);width: fit-content;display: inline-flex;">@if($feel->likes_count > 0) {{$feel->likes_count}} <p style="margin: 0px 5px;">{{__('messages.like')}}</p>@endif</span> 
+                    
+                    <span id="show-dot{{$feel->id}}" @if(LaravelLocalization::getCurrentLocaleDirection() == "ltr") style="display:none;margin: 0px 2px 0px -7px;vertical-align: bottom;font-size: 19px;color: rgb(197, 87, 84);" @else style="display:none;margin: 0px -5px 0px 3px;vertical-align: bottom;font-size: 19px;color: rgb(197, 87, 84);" @endif>.</span>
+
+                    @if(($feel->likes_count > 0) and ($feel->comments_count > 0))
+                        <span id="remove-dot{{$feel->id}}" @if(LaravelLocalization::getCurrentLocaleDirection() == "ltr") style="margin: 0px 2px 0px -7px;vertical-align: bottom;font-size: 19px;color: rgb(197, 87, 84);" @else style="margin: 0px -5px 0px 3px;vertical-align: bottom;font-size: 19px;color: rgb(197, 87, 84);" @endif>.</span>
+                    @endif
+                    <span style="margin-left: -2px;margin-right: -2px;font-size: 12px;color: rgb(197, 87, 84);width: fit-content;display: inline-flex;vertical-align: -webkit-baseline-middle;">@if($feel->comments_count > 0) {{$feel->comments_count}} <p style="margin: 0px 5px;">{{__('messages.comment')}}</p> @endif</span>
+                </div>
                 @can('delete', $feel)
                 <div class="row likecommentshare" style="margin-bottom: 23px;">
                     <div class="col-4">                        
-                        <img class="like" src="{{asset('assets/images/like.png')}}" data-count="{{$feel->likes_count}}" width="20px" @if(!empty($feel->likes[0])) style="display: none;" @endif style="cursor: pointer;" id="like{{$feel->id}}" data-id="{{$feel->id}}" alt="Like">
-                        <img class="dislike" src="{{asset('assets/images/dislike.png')}}" data-count="{{$feel->likes_count}}" @if(empty($feel->likes[0])) style="display: none;" @endif width="20px" style="cursor: pointer;" data-id="{{$feel->id}}" id="dislike{{$feel->id}}" alt="dislike">
+                        <img class="like" src="{{asset('assets/images/like.png')}}" data-commentCount="{{$feel->comments_count}}" data-count="{{$feel->likes_count}}" width="20px" @if(!empty($feel->likes[0])) style="display: none;" @endif style="cursor: pointer;" id="like{{$feel->id}}" data-id="{{$feel->id}}" alt="Like">
+                        <img class="dislike" src="{{asset('assets/images/dislike.png')}}" data-commentCount="{{$feel->comments_count}}" data-count="{{$feel->likes_count}}" @if(empty($feel->likes[0])) style="display: none;" @endif width="20px" style="cursor: pointer;" data-id="{{$feel->id}}" id="dislike{{$feel->id}}" alt="dislike">
                         <p>{{__('messages.like')}}</p>
                     </div>
                     <div class="col-4">
@@ -123,8 +127,8 @@
                     <div class="row likecommentshare" style="margin-bottom: 23px;">
                         
                         <div class="col-6">
-                            <img class="like" src="{{asset('assets/images/like.png')}}" data-count="{{$feel->likes_count}}" width="20px" @if(!empty($feel->likes[0])) style="display: none;" @endif style="cursor: pointer;" id="like{{$feel->id}}" data-id="{{$feel->id}}" alt="Like">
-                            <img class="dislike" src="{{asset('assets/images/dislike.png')}}" data-count="{{$feel->likes_count}}" @if(empty($feel->likes[0])) style="display: none;" @endif width="20px" style="cursor: pointer;" data-id="{{$feel->id}}" id="dislike{{$feel->id}}" alt="dislike">
+                            <img class="like" src="{{asset('assets/images/like.png')}}" data-commentCount="{{$feel->comments_count}}" data-count="{{$feel->likes_count}}" width="20px" @if(!empty($feel->likes[0])) style="display: none;" @endif style="cursor: pointer;" id="like{{$feel->id}}" data-id="{{$feel->id}}" alt="Like">
+                            <img class="dislike" src="{{asset('assets/images/dislike.png')}}" data-commentCount="{{$feel->comments_count}}" data-count="{{$feel->likes_count}}" @if(empty($feel->likes[0])) style="display: none;" @endif width="20px" style="cursor: pointer;" data-id="{{$feel->id}}" id="dislike{{$feel->id}}" alt="dislike">
                             <p>{{__('messages.like')}}</p>
                         </div>
                         <div class="col-6">
@@ -515,6 +519,12 @@
                 var count = $(this).data('count');
                 count +=1;
                 var id = $(this).attr('data-id');
+                var ccount = $(this).attr('data-commentCount');
+                if(ccount > 0)
+                {
+                    $("#show-dot" + id).css("display", "inline-flex");
+                    $("#remove-dot" + id).css("display", "none");
+                }
                 $("#like-count" + id).html(count + "<p style='margin: 0px 5px;''>{{__('messages.like')}}</p>");
                 $(this).attr('data-count', count); 
                 $("#dislike" + id).attr('data-count', count);
@@ -542,12 +552,14 @@
                 var count = $(this).data('count');
                 count -=1;
                 var txt = "<p style='margin: 0px 5px;''>{{__('messages.like')}}</p>";
+                var id = $(this).attr('data-id');
                 if(count == 0)
                 {
                     count = "";
                     txt = "";
+                    $("#remove-dot" + id).css("display", "none");
+                    $("#show-dot" + id).css("display", "none");
                 }
-                var id = $(this).attr('data-id');
                 $("#like-count" + id).html(count + txt);
                 $(this).attr('data-count', count); 
                 $("#like" + id).attr('data-count', count);
