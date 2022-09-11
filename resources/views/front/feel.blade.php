@@ -224,12 +224,12 @@
                         <div class="dropdown-menu dropdownMenuButton{{$comment->id}}" aria-labelledby="dropdownMenuButton{{$comment->id}}" style="top: 10px;" >
                             @can('showComment', $feel)
                                 @if($comment->type == 0)
-                                    <a class="dropdown-item" href="{{ route('feeling.comments.make.public', [$feel->id, $comment->id]) }}/#c{{$comment->id}}">{{__('messages.Make Public')}}</a>
+                                    <a class="dropdown-item" href="{{ route('feeling.comments.make.public', [$feel->id, $comment->id]) }}?c_id={{$comment->id}}">{{__('messages.Make Public')}}</a>
                                 @else
-                                    <a class="dropdown-item" href="{{ route('feeling.comments.make.private', [$feel->id, $comment->id]) }}/#c{{$comment->id}}">{{__('messages.Make Private')}}</a>
+                                    <a class="dropdown-item" href="{{ route('feeling.comments.make.private', [$feel->id, $comment->id]) }}?c_id={{$comment->id}}">{{__('messages.Make Private')}}</a>
                                 @endif
                             @endcan                      
-                                <a class="dropdown-item" href="{{ route('feeling.comments.delete', [$feel->id, $comment->id]) }}/#c{{(int)($comment->id + 1)}}">{{__('messages.Delete')}}</a>                        
+                                <a class="dropdown-item" href="{{ route('feeling.comments.delete', [$feel->id, $comment->id]) }}?c_id={{(int)($comment->id + 1)}}">{{__('messages.Delete')}}</a>                        
                             
                         </div>
                     </li>
@@ -567,7 +567,28 @@
                         
                 });
             });
+
+            
+
         });
         
     </script>
+
+    <?php if(isset($_GET['c_id'])){ ?>
+                <script>
+                    $(document).ready(function(){
+                        var navigationFn = {
+                            goToSection: function(id) {
+                                console.log(id);
+                                var off = $(id).offset().top;
+                                $('html, body').animate({
+                                    scrollTop: off
+                                }, 0);
+                            }
+                        }
+
+                        navigationFn.goToSection('<?php echo "#" . $_GET["c_id"] ?>');
+                    });
+                </script>
+    <?php } ?>
 @endsection

@@ -136,9 +136,9 @@ class CommentController extends Controller
                                 }
             $comment->delete();
             Comment::where('parent_id', $comment_id)->delete();
-            return redirect()->back()->with('success', __('messages.Your Comment Has Been Deleted Successfully'));
+            return redirect()->to(route('feeling.show', [$feel->user->name, $feel->id]) . "?c_id=c" . $comment->id)->with('success', __('messages.Your Comment Has Been Deleted Successfully'));
         }else{
-            return redirect()->back();
+            return redirect()->to(route('feeling.show', [$feel->user->name, $feel->id]) . "?c_id=c" . $comment->id);
         }
         
     }
@@ -150,7 +150,7 @@ class CommentController extends Controller
         $this->authorize('makePrivate', $feel);
         $comment->type = 0;
         $comment->save();
-        return redirect()->back()->with('success', __('messages.The Comment Has Been Made Private'));
+        return redirect()->to(route('feeling.show', [$feel->user->name, $feel->id]) . "?c_id=c" . $comment->id)->with('success', __('messages.The Comment Has Been Made Private'));
     }
 
     public function makePublic($feel_id, $comment_id)
@@ -160,7 +160,7 @@ class CommentController extends Controller
         $this->authorize('makePublic', $feel);
         $comment->type = 1;
         $comment->save();
-        return redirect()->back()->with('success', __('messages.The Comment Has Been Made Public'));   
+        return redirect()->to(route('feeling.show', [$feel->user->name, $feel->id]) . "?c_id=c" . $comment->id)->with('success', __('messages.The Comment Has Been Made Public'));   
     }
 
     public function makeAllPrivate($id)
