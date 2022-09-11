@@ -118,7 +118,7 @@ class CommentController extends Controller
             $gcomment->type = 1;   
             $gcomment->save();
         }
-        return redirect()->back();
+        return redirect()->to(route('feeling.show', [$feeling->user->name, $feeling->id]) . "?c_id=c" . $commenting->id);
     }
 
     public function delete($feel_id, $comment_id)
