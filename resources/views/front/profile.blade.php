@@ -75,7 +75,7 @@
                     <form action="{{route('update.picture')}}" method="post" style="margin: 20px;" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group" style="margin-top: 20px;display: flex;">
-                            <a href="javascript:void(0);" style="display:block;width:fit-content; height:30px;" onclick="document.getElementById('image').click()"><i class="fa-solid fa-image" style="margin: 0px 7px;font-size: 29px;"></i>{{__('messages.Choose an image')}}</a>
+                            <a href="javascript:void(0);" style="display:block;width:fit-content; height:30px;font-size: 15px;" onclick="document.getElementById('image').click()"><i class="fa-solid fa-image" style="margin: 0px 7px;font-size: 29px;"></i>{{__('messages.Choose an image')}}</a>
                             <input type="file" class="form-control" id="image" name="picture" placeholder="" style="display:none">
                             <img id="images" style="max-width: 80px;margin: 0px 20px;" />
                         </div>
