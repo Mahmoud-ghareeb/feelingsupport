@@ -8,6 +8,7 @@
 
 //use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
  ?>
 <div class="row">
@@ -269,8 +270,21 @@ use Illuminate\Support\Facades\Schema;
                         },
                         success: function(data){
                             var name = data.user_name;
-                            var iddd = data.id; 
-                            window.location.href = "/feelings/share/" + name + "/" + iddd;
+                            var iddd = data.id;
+
+                            var tx = "<?php echo env('APP_URL'); ?>/feelings/feel/" + name + "/" + iddd;
+                            const shareData = {
+                                title: 'FeelingSupport',
+                                text: "{{__('messages.share feel message')}}",
+                                url: tx
+                            }
+                            
+                            try {
+                                navigator.share(shareData);
+                            } catch (err) {
+                                console.log(err);
+                            }
+
                         },
                         error: function(err){
                             console.log(err);

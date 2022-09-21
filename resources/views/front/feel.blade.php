@@ -107,7 +107,7 @@
                     <span style="margin-left: -2px;margin-right: -2px;font-size: 12px;color: rgb(197, 87, 84);width: fit-content;display: inline-flex;vertical-align: -webkit-baseline-middle;">@if($feel->comments_count > 0) {{$feel->comments_count}} <p style="margin: 0px 5px;">{{__('messages.comment')}}</p> @endif</span>
                 </div>
                 @can('delete', $feel)
-                <div class="row likecommentshare" style="margin-bottom: 23px;">
+                <div class="row likecommentshare" style="margin-top: 3px;margin-bottom: 3px;">
                     <div class="col-4">                        
                         <img class="like" src="{{asset('assets/images/like.png')}}" data-commentCount="{{$feel->comments_count}}" data-count="{{$feel->likes_count}}" width="20px" @if(!empty($feel->likes[0])) style="display: none;" @endif style="cursor: pointer;" id="like{{$feel->id}}" data-id="{{$feel->id}}" alt="Like">
                         <img class="dislike" src="{{asset('assets/images/dislike.png')}}" data-commentCount="{{$feel->comments_count}}" data-count="{{$feel->likes_count}}" @if(empty($feel->likes[0])) style="display: none;" @endif width="20px" style="cursor: pointer;" data-id="{{$feel->id}}" id="dislike{{$feel->id}}" alt="dislike">
@@ -124,7 +124,7 @@
                     
                 </div>
                 @else
-                    <div class="row likecommentshare" style="margin-bottom: 23px;">
+                    <div class="row likecommentshare" style="margin-top: 3px;margin-bottom: 3px;">
                         
                         <div class="col-6">
                             <img class="like" src="{{asset('assets/images/like.png')}}" data-commentCount="{{$feel->comments_count}}" data-count="{{$feel->likes_count}}" width="20px" @if(!empty($feel->likes[0])) style="display: none;" @endif style="cursor: pointer;" id="like{{$feel->id}}" data-id="{{$feel->id}}" alt="Like">
