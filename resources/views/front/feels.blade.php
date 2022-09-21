@@ -51,9 +51,9 @@
 
     @if(!empty($feels->first()))
         @if(auth()->id() == $feels->first()->user->id)
-            <div class="container" style="margin-top: -8px !important;">
+            <div class="container" style="margin-bottom: -15px;margin-top: -8px !important;">
         @else
-            <div class="container" style="margin-top: 0px !important;">
+            <div class="container" style="margin-top: 0px !important;margin-bottom: -15px;">
         @endif
     @endif
         @auth

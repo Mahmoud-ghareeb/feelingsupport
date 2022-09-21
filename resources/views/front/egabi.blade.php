@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container" style="margin-bottom: -20px;">
     <div class="row justify-content-center" style="background: white;margin-bottom:20px;border-radius:15px;margin-top: 0px;">
     
         <form style="margin-bottom: 20px; margin-top: 10px;" id="change-date">

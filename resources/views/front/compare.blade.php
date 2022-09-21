@@ -19,7 +19,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
     </div>
 </div>
 
-<div class="container">
+<div class="container" style="margin-bottom: -20px;">
     <div class="row justify-content-center" style="background: white;margin-bottom:20px;border-radius:15px;margin-top: 0px;">
         <p class="" style="margin-bottom: 15px;text-align: center;word-break: break-word;">{{__('messages.Choose muliple emojis?')}}</p>
         <div class="emmo-div" style="position: relative;">

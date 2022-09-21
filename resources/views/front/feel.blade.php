@@ -119,7 +119,8 @@
                         <p>{{__('messages.comment')}}</p>
                     </div>
                     <div class="col-4">
-                        <a href="{{route('feeling.share', [$feel->user->name, $feel->id])}}"><i class="fa-regular fa-share-from-square interact-icons" style="font-size: 17px;"></i></a><p>{{__('messages.share')}}</p>
+                        <!--{{route('feeling.share.diary', [$feel->user->name, $feel->id])}}-->
+                        <a href="javascript:void(0)"><i class="fa-regular fa-share-from-square share-outside interact-icons" style="font-size: 17px;" id="s{{ $feel->id }}" data-url="{{route('feeling.show', [$feel->user->name, $feel->id])}}"></i></a><p>{{__('messages.share')}}</p>
                     </div>
                     
                 </div>
@@ -491,8 +492,21 @@
                         },
                         success: function(data){
                             var name = data.user_name;
-                            var iddd = data.id; 
-                            window.location.href = "/feelings/share/" + name + "/" + iddd;
+                            var iddd = data.id;
+
+                            var tx = "<?php echo env('APP_URL'); ?>/feelings/feel/" + name + "/" + iddd;
+                            const shareData = {
+                                title: 'FeelingSupport',
+                                text: "{{__('messages.share feel message')}}",
+                                url: tx
+                            }
+                            
+                            try {
+                                navigator.share(shareData);
+                            } catch (err) {
+                                console.log(err);
+                            }
+                            
                         },
                         error: function(err){
                             console.log(err);
@@ -582,6 +596,25 @@
                         
                 });
             });
+
+            $(".share-outside").on('click', function(){
+               
+               var tx = $(this).data('url');
+               tx = tx.replace('/<?php echo app()->getLocale() ?>/', '/')
+              
+               const shareData = {
+                 title: 'FeelingSupport',
+                 text: "{{__('messages.share feel message')}}",
+                 url: tx
+               }
+               
+               try {
+                   navigator.share(shareData);
+               } catch (err) {
+                   console.log(err);
+               }
+               
+           });
 
         });
         

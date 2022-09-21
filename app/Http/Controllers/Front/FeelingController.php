@@ -435,7 +435,8 @@ class FeelingController extends Controller
             "reason"  => $request->reason ,
             "image"   => $image_s,
             "category" => "thanks",
-            "user_id" => $user_id
+            "user_id" => $user_id,
+            "type" => "1"
         ]);
         
         $data = ['user_name' => $user_name, 'id' => $data->id];

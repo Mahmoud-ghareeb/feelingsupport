@@ -229,7 +229,7 @@
             <div style="padding: 1px 9px 1px 9px;display: flex;">
                 <p style="font-size: x-large;margin-bottom: 0px;">@yield('title')</p>
             </div>
-            <main class="py-4" style="padding-top: 0px !important;">
+            <main class="py-4" style="padding-top: 0px !important;margin-bottom: -9px;">
                 @yield('content')
             </main>
         </div>  

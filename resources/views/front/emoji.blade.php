@@ -20,7 +20,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
     </div>
 </div>
 
-<div class="container">
+<div class="container" style="margin-bottom: -20px;">
     <div class="row justify-content-center" style="background: white;margin-bottom:20px;border-radius:15px;margin-top: 0px;">
     <div class="emmo-div" style="position: relative;">
                     <p class="center-element" style="margin-bottom: 15px;">{{__('messages.Choose an emoji')}}</p>
