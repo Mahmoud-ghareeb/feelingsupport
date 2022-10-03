@@ -21,6 +21,16 @@ Route::post('login', [ApiController::class, 'login']);
 Route::group(['middleware' => 'auth:api'], function(){
     
     Route::get('emojis', [ApiController::class, 'emojis']);
+    Route::post('store', [ApiController::class, 'store']);
+    Route::get('diary', [ApiController::class, 'diary']);
+    Route::get('diaryAsc', [ApiController::class, 'diaryAsc']);
+    Route::get('diaryDate/{date}', [ApiController::class, 'diaryDate']);
+    Route::get('diaryPopular', [ApiController::class, 'diaryPopular']);
+    Route::get('diaryShare', [ApiController::class, 'diaryShare']);
+    Route::get('diaryPrivate', [ApiController::class, 'diaryPrivate']);
+    Route::get('diaryMe', [ApiController::class, 'diaryMe']);
+    Route::get('diaryStatistics', [ApiController::class, 'diaryStatistics']);
+    Route::get('diaryThanks', [ApiController::class, 'diaryThanks']);
 
 });
 

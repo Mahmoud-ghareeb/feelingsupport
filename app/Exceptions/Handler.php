@@ -51,4 +51,28 @@ class Handler extends ExceptionHandler
         
         
     }
+
+    public function render($request, Throwable $exception)
+    {
+        // Determine whether it is an API interface
+        if($request->is('api/*')) {
+            $response = [];
+            $error = $this->convertExceptionToResponse($exception);
+            $response['message'] = $exception->getMessage();
+            $response['status_code'] = $error->getStatusCode();
+            if(config('app.debug')) {
+                if($error->getStatusCode() >= 500) {
+                    $response['debug']['line'] = $exception->getLine(); // error line
+                    $response['debug']['file'] = $exception->getFile(); // error file
+                    $response['debug']['class'] = get_class($exception); // error position
+                    $response['debug']['trace'] = explode("\n", $exception->getTraceAsString()); //Error stack
+                }
+            }
+            // response api
+            return response()->json($response, $error->getStatusCode());
+        } else {
+            // response web
+            return parent::render($request, $exception);
+        }
+    }
 }
