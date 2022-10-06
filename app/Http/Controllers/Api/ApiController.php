@@ -16,6 +16,12 @@ class ApiController extends Controller
 {
     use Responseable, Imageable;
 
+    // public function language(Request $request){
+    //     $lang = $request->lang;
+    //     app()->setLocale($lang);
+    //     return $this->returnSuccessMessage("language set successfully", "F000");
+    // }
+
     public function registration(Request $request){
 
         $this->validate($request,[
@@ -59,9 +65,15 @@ class ApiController extends Controller
 
     }
 
-    public function emojis()
+    // public function emojis()
+    // {
+    //     $emojis = Emoji::orderBy('raw_order')->get();
+    //     return $this->returnData('emojis', $emojis, 'all emojis');
+    // }
+
+    public function emojis($lang)
     {
-        $emojis = Emoji::orderBy('raw_order')->get();
+        $emojis = Emoji::select('color', 'type_' . $lang)->orderBy('raw_order')->get();
         return $this->returnData('emojis', $emojis, 'all emojis');
     }
     
@@ -97,10 +109,10 @@ class ApiController extends Controller
         }
     }
 
-    public function diary()
+    public function diary($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis', 'user')
+        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -111,10 +123,10 @@ class ApiController extends Controller
         return $this->returnData('diary', $feels, 'all feelings in descending order');
     }
 
-    public function diaryAsc()
+    public function diaryAsc($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis', 'user')
+        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -125,11 +137,11 @@ class ApiController extends Controller
         return $this->returnData('diary', $feels, 'all feelings in ascending order');
     }
 
-    public function diaryDate($date)
+    public function diaryDate($date, $lang)
     {
         $date = date("Y-m-d", strtotime($date));
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis', 'user')
+        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -141,10 +153,10 @@ class ApiController extends Controller
         return $this->returnData('diary', $feels, 'all feelings in particular date');
     }
 
-    public function diaryPopular()
+    public function diaryPopular($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis', 'user')
+        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -156,10 +168,10 @@ class ApiController extends Controller
         return $this->returnData('diary', $feels, 'feelings order by comments count');
     }
 
-    public function diaryShare()
+    public function diaryShare($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis', 'user')
+        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -172,10 +184,10 @@ class ApiController extends Controller
         return $this->returnData('diary', $feels, 'all public feelings');
     }
 
-    public function diaryPrivate()
+    public function diaryPrivate($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis', 'user')
+        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -188,10 +200,10 @@ class ApiController extends Controller
         return $this->returnData('diary', $feels, 'all private feelings');
     }
 
-    public function diaryMe()
+    public function diaryMe($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis', 'user')
+        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -203,10 +215,10 @@ class ApiController extends Controller
         return $this->returnData('diary', $feels, 'all feelings belongs to me');
     }
 
-    public function diaryStatistics()
+    public function diaryStatistics($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis', 'user')
+        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -218,10 +230,10 @@ class ApiController extends Controller
         return $this->returnData('diary', $feels, 'all statistics feelings');
     }
 
-    public function diaryThanks()
+    public function diaryThanks($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis', 'user')
+        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])

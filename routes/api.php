@@ -18,11 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [ApiController::class, 'registration']);
 Route::post('login', [ApiController::class, 'login']);
 
+
 Route::group(['middleware' => 'auth:api'], function(){
     
-    Route::get('emojis', [ApiController::class, 'emojis']);
+    Route::get('language', [ApiController::class, 'language']);
+    Route::get('emojis/{lang}', [ApiController::class, 'emojis']);
     Route::post('store', [ApiController::class, 'store']);
-    Route::get('diary', [ApiController::class, 'diary']);
+    Route::get('diary/{lang}', [ApiController::class, 'diary']);
     Route::get('diaryAsc', [ApiController::class, 'diaryAsc']);
     Route::get('diaryDate/{date}', [ApiController::class, 'diaryDate']);
     Route::get('diaryPopular', [ApiController::class, 'diaryPopular']);
