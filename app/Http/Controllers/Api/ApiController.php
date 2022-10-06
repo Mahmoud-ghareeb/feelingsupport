@@ -34,7 +34,8 @@ class ApiController extends Controller
            'password'=>bcrypt($request->password)
         ]);
         $token = $row->createToken('Token')-> accessToken;
-        return $this->returnData('token', $token, 'user token');
+        $row->token = $token;
+        return $this->returnData('data', $row, 'user token');
 
     }
 
@@ -50,7 +51,8 @@ class ApiController extends Controller
         if(Auth::attempt($data)){
             $user = User::find(Auth::id());
             $token = $user->createToken('Token')->accessToken; 
-            return $this->returnData('token', $token, 'user token');
+            $user->token = $token;
+            return $this->returnData('data', $user, 'user token');
         }else{
             return $this->returnError('F413', 'Unauthorised');
         }
