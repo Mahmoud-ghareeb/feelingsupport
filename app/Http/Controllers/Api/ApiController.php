@@ -35,7 +35,7 @@ class ApiController extends Controller
         ]);
         $token = $row->createToken('Token')-> accessToken;
         $row->token = $token;
-        return $this->returnData('data', $row, 'user token');
+        return $this->returnData('data', $row, 'user data');
 
     }
 
@@ -52,7 +52,7 @@ class ApiController extends Controller
             $user = User::find(Auth::id());
             $token = $user->createToken('Token')->accessToken; 
             $user->token = $token;
-            return $this->returnData('data', $user, 'user token');
+            return $this->returnData('data', $user, 'user data');
         }else{
             return $this->returnError('F413', 'Unauthorised');
         }
