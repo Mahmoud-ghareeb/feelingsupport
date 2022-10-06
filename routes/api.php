@@ -25,14 +25,14 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('emojis/{lang}', [ApiController::class, 'emojis']);
     Route::post('store', [ApiController::class, 'store']);
     Route::get('diary/{lang}', [ApiController::class, 'diary']);
-    Route::get('diaryAsc', [ApiController::class, 'diaryAsc']);
-    Route::get('diaryDate/{date}', [ApiController::class, 'diaryDate']);
-    Route::get('diaryPopular', [ApiController::class, 'diaryPopular']);
-    Route::get('diaryShare', [ApiController::class, 'diaryShare']);
-    Route::get('diaryPrivate', [ApiController::class, 'diaryPrivate']);
-    Route::get('diaryMe', [ApiController::class, 'diaryMe']);
-    Route::get('diaryStatistics', [ApiController::class, 'diaryStatistics']);
-    Route::get('diaryThanks', [ApiController::class, 'diaryThanks']);
+    Route::get('diaryAsc/{lang}', [ApiController::class, 'diaryAsc']);
+    Route::get('diaryDate/{date}/{lang}', [ApiController::class, 'diaryDate']);
+    Route::get('diaryPopular/{lang}', [ApiController::class, 'diaryPopular']);
+    Route::get('diaryShare/{lang}', [ApiController::class, 'diaryShare']);
+    Route::get('diaryPrivate/{lang}', [ApiController::class, 'diaryPrivate']);
+    Route::get('diaryMe/{lang}', [ApiController::class, 'diaryMe']);
+    Route::get('diaryStatistics/{lang}', [ApiController::class, 'diaryStatistics']);
+    Route::get('diaryThanks/{lang}', [ApiController::class, 'diaryThanks']);
 
 });
 
