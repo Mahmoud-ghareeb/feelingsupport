@@ -16,7 +16,14 @@
                     <h4 class="center-element">{{$user->first_name}} {{$user->last_name}}</h4>
                     <h5 class="center-element" style="color:gray">{{$user->name}}@</h5>
                     <p class="center-element" style="margin-bottom: 0px;padding: 5px;text-align: center;">{{__('messages.share account')}}</p>
-                    <div class="center-element">
+                    <div class="row likecommentshare" style="margin-top: -3px;margin-bottom: 10px;">
+                        <div class="col-12">
+                            <button style="border: none;background: none;" >
+                                <i  class="fa-regular share-outside fa-share-from-square interact-icons" style="font-size: 17px;" data-id="allchartstate"></i><p>{{__('messages.share')}}</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="center-element d-none">
                         <a href="https://twitter.com/intent/tweet?text=support+me+please%21%21&url={{route('feeling.user', Auth::user()->name)}}">
                             <i class="fa-brands fa-twitter interact-icons" style="color: black;font-size: large;margin: 10px;" title="share on twitter"></i>
                         </a>
@@ -103,5 +110,29 @@
           document.getElementById('images').src = src
         } 
     });
+    </script>
+    <script>
+        $(document).ready(function(){
+
+            $(".share-outside").on('click', function(){
+               
+               var tx = '<?php echo route('feeling.user', auth()->user()->name) ?>'
+               tx = tx.replace('/<?php echo app()->getLocale() ?>/', '/')
+              
+               const shareData = {
+                 title: 'FeelingSupport',
+                 text: "{{__('messages.share feel message')}}",
+                 url: tx
+               }
+               
+               try {
+                   navigator.share(shareData);
+               } catch (err) {
+                   console.log(err);
+               }
+               
+            });
+
+        });
     </script>
 @endsection
