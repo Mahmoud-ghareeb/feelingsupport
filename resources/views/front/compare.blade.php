@@ -21,7 +21,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 <div class="container" style="margin-bottom: -20px;">
     <div class="row justify-content-center" style="background: white;margin-bottom:20px;border-radius:15px;margin-top: 0px;">
-        <p class="" style="margin-bottom: 15px;text-align: center;word-break: break-word;">{{__('messages.Choose muliple emojis?')}}</p>
+        <p class="" style="margin-bottom: 15px;text-align: center;word-break: break-word;margin-top: 10px;">{{__('messages.Choose muliple emojis?')}}</p>
         <div class="emmo-div" style="position: relative;">
             <!-- <img src="{{ asset('assets/images/emotions/happy/amazing.svg') }}" alt=""> -->
             <!-- style="min-width: 300px;overflow-x: auto;overflow-y: hidden;white-space: nowrap;" -->
