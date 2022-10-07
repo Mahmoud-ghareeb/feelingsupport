@@ -55,11 +55,11 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
         <div class="row likecommentshare d-none" style="margin-top: 21px;margin-bottom: 21px;">
             <div class="col-12">
                 <button style="border: none;background: none;" >
-                    <i  class="fa-regular share-image fa-share-from-square interact-icons" data-id="chartt"></i><p>{{__('messages.share')}}</p>
+                    <i  class="fa-regular share-image fa-share-from-square interact-icons" style="font-size: 17px;" data-id="chartt"></i><p>{{__('messages.share')}}</p>
                 </button>
             </div>
         </div>
-        <div class="col-md-8" style="" id="chart1">
+        <div class="col-md-8" id="chart1">
             <div id = "allchartstate">
                 <p style="width: fit-content;margin: 0px auto 13px;font-size: large;">{{__('messages.statistic from')}} <span id="first_span"></span> {{__('messages.to')}} <span id="second_span"></span> </p>
                 <table class="table table-striped" id="chartt" style="width: 50vw;margin: 0px auto 17px;">
@@ -77,10 +77,10 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                 <div id="emoji_statistic"></div>
             </div>
             
-            <div class="row likecommentshare" style="margin-top: 21px;">
+            <div class="row likecommentshare" style="margin-top: 3px;margin-bottom: 10px;">
                 <div class="col-12">
                     <button style="border: none;background: none;" >
-                        <i  class="fa-regular share-image fa-share-from-square interact-icons" data-id="allchartstate"></i><p>{{__('messages.share')}}</p>
+                        <i  class="fa-regular share-image fa-share-from-square interact-icons" style="font-size: 17px;" data-id="allchartstate"></i><p>{{__('messages.share')}}</p>
                     </button>
                 </div>
             </div>

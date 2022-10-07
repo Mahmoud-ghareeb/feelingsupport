@@ -58,10 +58,10 @@
                     </table>
                 </div>
             </div>
-            <div class="row likecommentshare" style="margin-top: 21px;">
+            <div class="row likecommentshare" style="margin-top: -26px;margin-bottom: 10px;">
                 <div class="col-12">
                     <button style="border: none;background: none;" >
-                        <i  class="fa-regular share-image fa-share-from-square interact-icons" data-id="statuschart"></i><p>{{__('messages.share')}}</p>
+                        <i  class="fa-regular share-image fa-share-from-square interact-icons" style="font-size: 17px;" data-id="statuschart"></i><p>{{__('messages.share')}}</p>
                     </button>
                 </div>
             </div>

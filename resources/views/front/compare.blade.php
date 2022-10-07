@@ -173,10 +173,10 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                 <div id="chart" style="height: 400px;"></div>
             </div>
             
-            <div class="row likecommentshare" style="margin-top: 21px;">
+            <div class="row likecommentshare" style="margin-top: -41px;margin-bottom: 10px;">
                 <div class="col-12">
                     <button style="border: none;background: none;" >
-                        <i  class="fa-regular share-image fa-share-from-square interact-icons" data-id="allchart"></i><p>{{__('messages.share')}}</p>
+                        <i  class="fa-regular share-image fa-share-from-square interact-icons" style="font-size: 17px;" data-id="allchart"></i><p>{{__('messages.share')}}</p>
                     </button>
                 </div>
             </div>
