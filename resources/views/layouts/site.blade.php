@@ -157,7 +157,7 @@
                                 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownlang" style="left: auto;right: auto;">
                                     <div class="scrollDiv" style="height: 400px;overflow-y: auto;">
-                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    @foreach(LaravelLocalization::getLocalesOrder() as $localeCode => $properties)
                                         <a rel="alternate" class="dropdown-item" style="color: black;" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                                             {{ $properties['native'] }}
                                         </a>

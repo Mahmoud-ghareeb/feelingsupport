@@ -5,7 +5,10 @@
 @endsection
 
 @section('content')
-<?php use Illuminate\Support\Facades\Schema; ?>
+<?php use Illuminate\Support\Facades\Schema;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
+ ?>
 <div class="container">
     <div class="row justify-content-center" style="background: white;">
         <div class="col-md-8" style="padding: 20px;">
@@ -44,7 +47,7 @@
                             <ul class="dropdown icon-dropdown" style="padding: 0px 0px 0px 0px;position: relative;">
                                 <li style="list-style-type: none;"></li>
                                 <a id="emojii" style="color: black; font-size: 19px;padding-left: 0px;<?php if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl'){ ?> padding-right: 10px; <?php }else{ ?> padding-right: 0px; <?php } ?>" class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><i class="fa-solid fa-caret-down"></i></a>
-                                <ul class="dropdown-menu top-dropdown lg-dropdown notification-dropdown" @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl') style="width: 320px;position: absolute;left: -66px;" @else style="width: 320px;position: absolute;left: -240px;" @endif aria-labelledby="emojii" id="xemoji">
+                                <ul class="dropdown-menu top-dropdown lg-dropdown notification-dropdown" @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl') style="width: 324px;position: absolute;left: -66px;" @else style="width: 324px;position: absolute;left: -240px;" @endif aria-labelledby="emojii" id="xemoji">
                                     <li>                                
                                         <div class="scrollDiv" style="height: 250px;overflow-y: auto;">
                                             <div class="notification-list d-emoji">
