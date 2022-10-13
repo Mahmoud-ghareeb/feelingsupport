@@ -112,7 +112,7 @@ class ApiController extends Controller
     public function diary($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
+        $feels = Feeling::with('emojis:css_class,color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -126,7 +126,7 @@ class ApiController extends Controller
     public function diaryAsc($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
+        $feels = Feeling::with('emojis:css_class,color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -141,7 +141,7 @@ class ApiController extends Controller
     {
         $date = date("Y-m-d", strtotime($date));
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
+        $feels = Feeling::with('emojis:css_class,color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -156,7 +156,7 @@ class ApiController extends Controller
     public function diaryPopular($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
+        $feels = Feeling::with('emojis:css_class,color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -171,7 +171,7 @@ class ApiController extends Controller
     public function diaryShare($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
+        $feels = Feeling::with('emojis:css_class,color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -187,7 +187,7 @@ class ApiController extends Controller
     public function diaryPrivate($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
+        $feels = Feeling::with('emojis:css_class,color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -203,7 +203,7 @@ class ApiController extends Controller
     public function diaryMe($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
+        $feels = Feeling::with('emojis:css_class,color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -218,7 +218,7 @@ class ApiController extends Controller
     public function diaryStatistics($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
+        $feels = Feeling::with('emojis:css_class,color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
@@ -233,7 +233,7 @@ class ApiController extends Controller
     public function diaryThanks($lang)
     {
         $user_id = Auth::id();
-        $feels = Feeling::with('emojis:color,type_' . $lang, 'user')
+        $feels = Feeling::with('emojis:css_class,color,type_' . $lang, 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
