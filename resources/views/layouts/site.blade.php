@@ -365,13 +365,13 @@
 
         <ul class="list-unstyled" style="padding:0px;display: flex;margin: 12px auto;width: fit-content;font-size:14px;color:white;">
           <li style="margin: 0px 3px;">
-            <a href="{{route('terms')}}" style="color: #fff;">{{__('messages.terms and condition')}}</a>
+            <a href="{{route('terms')}}" style="color: #fff;font-size: 11px;">{{__('messages.terms and condition')}}</a>
           </li>
           <li style="margin: 0px 10px;">
-            <a href="{{route('privacy')}}" style="color: #fff;">{{__('messages.privacy policy')}}</a>
+            <a href="{{route('privacy')}}" style="color: #fff;font-size: 11px;">{{__('messages.privacy policy')}}</a>
           </li>
           <li style="margin: 0px 3px;">
-            <a href="{{route('about.us')}}" style="color: #fff;">{{__('messages.About us')}}</a>
+            <a href="{{route('about.us')}}" style="color: #fff;font-size: 11px;">{{__('messages.About us')}}</a>
           </li>
         </ul>
 
