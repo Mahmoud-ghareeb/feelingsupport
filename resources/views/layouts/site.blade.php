@@ -361,7 +361,7 @@
       <!-- Grid column -->
 
       <!-- Grid column -->
-      <div class="col-md-3 mb-md-0">
+      <div class="col-12 mb-md-0">
 
         <ul class="list-unstyled" style="padding:0px;display: flex;margin: 12px auto;width: fit-content;font-size:14px;color:white;">
           <li style="margin: 0px 3px;">
