@@ -51,8 +51,8 @@
                 <p style="width: fit-content;margin: 0px auto -28px;font-size: large;">{{__('messages.status statistic from')}} <span id="first_span"></span> {{__('messages.to')}} <span id="second_span"></span> </p>
                 <div id="chart" style="height: 400px;"></div>
                 <div class="row justify-content-center" style="background: white; margin-bottom: 20px; border-radius: 15px; margin-top: 0px;">
-                    <table class="table table-striped" id="chartt" style="width: 50vw;margin-top: -20px;">
-                        <tbody id="bodyTT" dir="rtl">
+                    <table class="table table-striped" id="chartt" style="width: 50vw;margin-top: -20px;direction: rtl;">
+                        <tbody id="bodyTT">
                             
                         </tbody>
                     </table>
