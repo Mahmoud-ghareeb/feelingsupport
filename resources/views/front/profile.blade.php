@@ -6,7 +6,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8" style="margin-top: 30px;">
+        <div class="col-md-8" style="margin-top: 30px;padding: 0px;">
             <div class="card" style="border-radius: 39px;margin-top: 38px;">
                 <div style="border-radius: 100px;height: 150px;width: 150px;position: relative;margin: auto;top: -60px;">
                     <img src="{{asset($user->picture)}}" style="padding: 5px;border-radius: 50%;" height="150" width="150">
