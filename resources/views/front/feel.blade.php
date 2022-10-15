@@ -95,7 +95,8 @@
                 @else
                     <p class="mb-3" dir="auto" style="padding: 4px 2px;word-break: break-word;font-size: 15px;">{{$feel->reason}}</p>
                 @endif
-                
+                </a>
+                <a href="{{route('feeling.show', [$feel->user->name, $feel->id])}}" style="color:black">
                 <div style="border-bottom: 1px solid rgb(240, 242, 245);">
                     <span id="like-count{{$feel->id}}" style="margin-left: 3px;margin-right: 3px;vertical-align: bottom;font-size: 12px;color: rgb(197, 87, 84);width: fit-content;display: inline-flex;">@if($feel->likes_count > 0) {{$feel->likes_count}} <p style="margin: 0px 5px;">{{__('messages.like')}}</p>@endif</span> 
                     
