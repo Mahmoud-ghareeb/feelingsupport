@@ -9,6 +9,7 @@ use App\Models\Feeling;
 use App\Models\User;
 use App\Traits\Imageable;
 use App\Traits\Responseable;
+use Chartisan\PHP\Chartisan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -244,5 +245,78 @@ class ApiController extends Controller
                         ->get();
         return $this->returnData('diary', $feels, 'all thanks feelings');
     }
+
+    // public function compareCharts(Request $request)
+    // {
+    //     $startdatestart = date("Y-m-d", strtotime($request['startdatestart']));
+    //     $startdateend   = date("Y-m-d", strtotime($request['startdateend']));
+    //     $enddatestart   = date("Y-m-d", strtotime($request['enddatestart']));
+    //     $enddateend     = date("Y-m-d", strtotime($request['enddateend']));
+    //     $lang           = $request['lang'];
+    //     $ids            = $request['ids'];
+
+    //     if($ids == "")
+    //     {
+    //         $feelingstart = Emoji::withCount(['feelings' => function($q) use($startdatestart, $startdateend){
+    //             return $q->where('feeling_emoji.user_id', Auth::id())
+    //                     ->whereBetween('feeling_emoji.created_at', [$startdatestart.' 00:00:00',$startdateend.' 23:59:59']);
+    //         }])->get();
+    
+    //         $feelingend = Emoji::withCount(['feelings' => function($q) use($enddatestart, $enddateend){
+    //             return $q->where('feeling_emoji.user_id', Auth::id())
+    //                     ->whereBetween('feeling_emoji.created_at', [$enddatestart.' 00:00:00',$enddateend.' 23:59:59']);
+    //         }])->get();
+    //     }else
+    //     {
+    //         $ids            = explode(',', $request['ids']);
+    //         $feelingstart   = Emoji::whereIn('id', $ids)
+    //                              ->withCount(['feelings' => function($q) use($startdatestart, $startdateend){
+    //                                     return $q->where('feeling_emoji.user_id', Auth::id())
+    //                                              ->whereBetween('feeling_emoji.created_at', [$startdatestart.' 00:00:00',$startdateend.' 23:59:59']);
+    //                                 }])->get();
+    
+    //         $feelingend = Emoji::whereIn('id', $ids)
+    //                            ->withCount(['feelings' => function($q) use($enddatestart, $enddateend){
+    //                                 return $q->where('feeling_emoji.user_id', Auth::id())
+    //                                         ->whereBetween('feeling_emoji.created_at', [$enddatestart.' 00:00:00',$enddateend.' 23:59:59']);
+    //                             }])->get();
+    //     }
+
+        
+    //     $totalstart = 0;
+    //     $totalend   = 0;
+
+    //     foreach($feelingstart as $feel)
+    //     {
+    //         $totalstart += $feel->feelings_count;
+    //     }
+    //     foreach($feelingend as $feel)
+    //     {
+    //         $totalend += $feel->feelings_count;
+    //     }
+
+    //     $types = $feelingstart->map(function($feel) use ($lang){
+    //         $type = 'type_' . $lang;
+    //         return $feel->$type;
+    //     })->toArray();
+
+    //     $countsStart = $feelingstart->map(function($feel){
+    //         return $feel->feelings_count;
+    //     })->toArray();
+
+    //     $countsEnd = $feelingend->map(function($feel){
+    //         return $feel->feelings_count;
+    //     })->toArray();
+
+
+        
+
+    //     $build = Chartisan::build()
+    //         ->labels($types)
+    //         ->dataset('Feeling', $countsStart)
+    //         ->dataset('Feeling2', $countsEnd);
+
+    //         return $this->returnData('diary', $build, 'all thanks feelings');
+    // }
     
 }

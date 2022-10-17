@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('diaryMe/{lang}', [ApiController::class, 'diaryMe']);
     Route::get('diaryStatistics/{lang}', [ApiController::class, 'diaryStatistics']);
     Route::get('diaryThanks/{lang}', [ApiController::class, 'diaryThanks']);
+    // Route::get('compare', [ApiController::class, 'compareCharts']);
 
 });
 
