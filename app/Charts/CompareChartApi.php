@@ -13,10 +13,9 @@ use Illuminate\Support\Facades\Auth;
 
 class CompareChart extends BaseChart
 {
-
     public function __construct()
     {
-        $this->middlewares ='web';
+        $this->middlewares ='auth:api';
     }
     /**
      * Handles the HTTP request for the given chart.
