@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
-class CompareChart extends BaseChart
+class CompareChartApi extends BaseChart
 {
     public function __construct()
     {
