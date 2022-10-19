@@ -11,11 +11,11 @@ use ConsoleTVs\Charts\BaseChart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class DailyChart extends BaseChart
+class DailyChartApi extends BaseChart
 {
     public function __construct()
     {
-        $this->middlewares = ['web'];
+        $this->middlewares = ['auth:api'];
     }
     /**
      * Handles the HTTP request for the given chart.

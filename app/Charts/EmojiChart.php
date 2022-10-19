@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 
 class EmojiChart extends BaseChart
 {
+    public function __construct()
+    {
+        $this->middlewares = ['web'];
+    }
     /**
      * Handles the HTTP request for the given chart.
      * It must always return an instance of Chartisan

@@ -5,17 +5,16 @@ declare(strict_types = 1);
 namespace App\Charts;
 
 use App\Models\Emoji;
-use App\Models\Feeling;
 use Chartisan\PHP\Chartisan;
 use ConsoleTVs\Charts\BaseChart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class DailyChart extends BaseChart
+class EmojiChartApi extends BaseChart
 {
     public function __construct()
     {
-        $this->middlewares = ['web'];
+        $this->middlewares = ['auth:api'];
     }
     /**
      * Handles the HTTP request for the given chart.
@@ -26,22 +25,24 @@ class DailyChart extends BaseChart
     {
         $startDate = date("Y-m-d", strtotime($request['startdate']));
         $endDate = date("Y-m-d", strtotime($request['enddate']));
+        $emoji_id = $request['emoji_id'];
         $lang     = $request['lang'];
 
         $feeling = Emoji::withCount(['feelings' => function($q) use($startDate, $endDate){
-            return $q
-                    ->where('feeling_emoji.user_id', Auth::id())
+            return $q->where('feeling_emoji.user_id', Auth::id())
+                    ->whereBetween('feeling_emoji.created_at', [$startDate.' 00:00:00',$endDate.' 23:59:59']);
+        }])->where('id', $emoji_id)
+           ->get();
+
+        $feelinTotal = Emoji::withCount(['feelings' => function($q) use($startDate, $endDate){
+            return $q->where('feeling_emoji.user_id', Auth::id())
                     ->whereBetween('feeling_emoji.created_at', [$startDate.' 00:00:00',$endDate.' 23:59:59']);
         }])->get();
         $total = 0;
-        foreach($feeling as $feel)
+        foreach($feelinTotal as $feelt)
         {
-            $total += $feel->feelings_count;
+            $total += $feelt->feelings_count;
         }
-        
-        // $feeling = $feeling->filter(function($feel){
-        //   return $feel->feelings_count > 0;
-        // });
 
         $types = $feeling->map(function($feel) use ($lang){
             $type = 'type_' . $lang;
@@ -76,7 +77,7 @@ class DailyChart extends BaseChart
                      'type_ms' => $feeling->type_ms,
                      "category" => $feeling->category];
         })->toArray();
-
+        
         return Chartisan::build()
             ->labels($types)
             ->dataset('Feeling', $counts)

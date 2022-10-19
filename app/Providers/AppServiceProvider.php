@@ -28,10 +28,13 @@ class AppServiceProvider extends ServiceProvider
     {
         $charts->register([
             \App\Charts\DailyChart::class,
+            \App\Charts\DailyChartApi::class,
             \App\Charts\EmojiChart::class,
+            \App\Charts\EmojiChartApi::class,
             \App\Charts\CompareChart::class,
             \App\Charts\CompareChartApi::class,
-            \App\Charts\EgabiChart::class
+            \App\Charts\EgabiChart::class,
+            \App\Charts\EgabiChartApi::class
         ]);
     }
 }
