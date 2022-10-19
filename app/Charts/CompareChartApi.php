@@ -15,7 +15,7 @@ class CompareChart extends BaseChart
 {
     public function __construct()
     {
-        $this->middlewares ='auth:api';
+        $this->middlewares = ['auth:api'];
     }
     /**
      * Handles the HTTP request for the given chart.

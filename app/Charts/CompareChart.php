@@ -16,7 +16,7 @@ class CompareChart extends BaseChart
 
     public function __construct()
     {
-        $this->middlewares ='web';
+        $this->middlewares = ['web'];
     }
     /**
      * Handles the HTTP request for the given chart.
