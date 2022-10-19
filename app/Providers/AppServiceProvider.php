@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
             \App\Charts\DailyChart::class,
             \App\Charts\EmojiChart::class,
             \App\Charts\CompareChart::class,
+            \App\Charts\CompareChartApi::class,
             \App\Charts\EgabiChart::class
         ]);
     }
