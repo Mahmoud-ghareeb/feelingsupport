@@ -37,14 +37,14 @@ Route::group(['middleware' => 'auth:api'], function(){
         Route::get('private/{id}', [ApiController::class, 'makePrivate']);
         Route::get('public/{id}', [ApiController::class, 'makePublic']);
     });
-    Route::get('delete/{id}', [ApiController::class, 'delete']);
-    Route::get('like/{id}', [ApiController::class, 'like']);
-    Route::get('all-private', [ApiController::class, 'makeAllPrivate']);
-    Route::get('all-public', [ApiController::class, 'makeAllPublic']);
+    Route::post('delete/{id}', [ApiController::class, 'delete']);
+    Route::post('like/{id}', [ApiController::class, 'like']);
+    Route::post('all-private', [ApiController::class, 'makeAllPrivate']);
+    Route::post('all-public', [ApiController::class, 'makeAllPublic']);
         
     Route::get('notification', [ApiController::class, 'getNotifications']);
-    Route::get('read-all', [ApiController::class, 'reaAllNotification']);
-    Route::get('clear-all', [ApiController::class, 'clearAllNotification']);
+    Route::post('read-all', [ApiController::class, 'reaAllNotification']);
+    Route::post('clear-all', [ApiController::class, 'clearAllNotification']);
     Route::get('notification/count', [ApiController::class, 'getNotificationsCount']);
 
 });
