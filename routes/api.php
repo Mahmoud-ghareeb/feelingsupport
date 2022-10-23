@@ -34,8 +34,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('diaryStatistics/{lang}', [ApiController::class, 'diaryStatistics']);
     Route::get('diaryThanks/{lang}', [ApiController::class, 'diaryThanks']);
     Route::group(["prefix" => 'make'], function(){
-        Route::get('private/{id}', [ApiController::class, 'makePrivate']);
-        Route::get('public/{id}', [ApiController::class, 'makePublic']);
+        Route::post('private/{id}', [ApiController::class, 'makePrivate']);
+        Route::post('public/{id}', [ApiController::class, 'makePublic']);
     });
     Route::post('delete/{id}', [ApiController::class, 'delete']);
     Route::post('like/{id}', [ApiController::class, 'like']);
@@ -46,6 +46,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('read-all', [ApiController::class, 'reaAllNotification']);
     Route::post('clear-all', [ApiController::class, 'clearAllNotification']);
     Route::get('notification/count', [ApiController::class, 'getNotificationsCount']);
+
+
 
 });
 
