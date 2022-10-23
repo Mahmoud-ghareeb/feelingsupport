@@ -275,27 +275,24 @@ class ApiController extends Controller
         return $this->returnSuccessMessage('Your Note Has Been Deleted Successfully', 'F000');
     }   
     
-    public function like(Request $request)
+    public function like($id)
     {
-        $feel = Feeling::findOrFail($request->feel_id);
-        $request->validate([
-            'feel_id' => ['required', 'integer']
-        ]);
+        $feel = Feeling::findOrFail($id);
         $registatoin_ids = User::where('id', $feel->user_id)->pluck('fcm_token');
         if(Auth::check()){
-            $likedata = Like::where(["user_id" => Auth::id(), "feeling_id" => $request->feel_id])->get();
+            $likedata = Like::where(["user_id" => Auth::id(), "feeling_id" => $id])->get();
             if(empty($likedata[0]))
             {
                 $user_id = Auth::id();
                 like::create([
-                    "feeling_id" => $request->feel_id,
+                    "feeling_id" => $id,
                     "user_id" => $user_id,
                     "owner_id" => $feel->user_id
                 ]);
                 Notification::create([
                     'user_id' => $user_id,
                     "owner_id" => $feel->user_id,
-                    'type_id' => $request->id,
+                    'type_id' => $id,
                     'type' => 'like'
                 ]);
                 
@@ -314,14 +311,14 @@ class ApiController extends Controller
         }else
         {
             like::create([
-                "feeling_id" => $request->feel_id,
+                "feeling_id" => $id,
                 "user_id" => NULL,
                 "owner_id" => $feel->user_id
             ]);
             Notification::create([
                 'user_id' => 0,
                 "owner_id" => $feel->user_id,
-                'type_id' => $request->id,
+                'type_id' => $id,
                 'type' => 'like'
             ]);
             
