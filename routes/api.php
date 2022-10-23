@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth:api'], function(){
         Route::get('public/{id}', [ApiController::class, 'makePublic']);
     });
     Route::get('delete/{id}', [ApiController::class, 'delete']);
-    Route::post('like/{id}', [ApiController::class, 'like']);
+    Route::get('like/{id}', [ApiController::class, 'like']);
     Route::get('all-private', [ApiController::class, 'makeAllPrivate']);
     Route::get('all-public', [ApiController::class, 'makeAllPublic']);
         
