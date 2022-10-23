@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FeelingRequest;
+use App\Models\Comment;
 use App\Models\Emoji;
 use App\Models\Feeling;
+use App\Models\Like;
+use App\Models\Notification;
 use App\Models\User;
 use App\Traits\Imageable;
 use App\Traits\Responseable;
@@ -246,77 +249,273 @@ class ApiController extends Controller
         return $this->returnData('diary', $feels, 'all thanks feelings');
     }
 
-    // public function compareCharts(Request $request)
-    // {
-    //     $startdatestart = date("Y-m-d", strtotime($request['startdatestart']));
-    //     $startdateend   = date("Y-m-d", strtotime($request['startdateend']));
-    //     $enddatestart   = date("Y-m-d", strtotime($request['enddatestart']));
-    //     $enddateend     = date("Y-m-d", strtotime($request['enddateend']));
-    //     $lang           = $request['lang'];
-    //     $ids            = $request['ids'];
+    public function makePrivate($id)
+    {
+        $feel = Feeling::findOrFail($id);
+        $this->authorize('makePrivate', $feel);
+        $feel->type = 0;
+        $feel->save();
+        return $this->returnSuccessMessage('Your Note Has Been Made Private', 'F000');
+    }
 
-    //     if($ids == "")
-    //     {
-    //         $feelingstart = Emoji::withCount(['feelings' => function($q) use($startdatestart, $startdateend){
-    //             return $q->where('feeling_emoji.user_id', Auth::id())
-    //                     ->whereBetween('feeling_emoji.created_at', [$startdatestart.' 00:00:00',$startdateend.' 23:59:59']);
-    //         }])->get();
-    
-    //         $feelingend = Emoji::withCount(['feelings' => function($q) use($enddatestart, $enddateend){
-    //             return $q->where('feeling_emoji.user_id', Auth::id())
-    //                     ->whereBetween('feeling_emoji.created_at', [$enddatestart.' 00:00:00',$enddateend.' 23:59:59']);
-    //         }])->get();
-    //     }else
-    //     {
-    //         $ids            = explode(',', $request['ids']);
-    //         $feelingstart   = Emoji::whereIn('id', $ids)
-    //                              ->withCount(['feelings' => function($q) use($startdatestart, $startdateend){
-    //                                     return $q->where('feeling_emoji.user_id', Auth::id())
-    //                                              ->whereBetween('feeling_emoji.created_at', [$startdatestart.' 00:00:00',$startdateend.' 23:59:59']);
-    //                                 }])->get();
-    
-    //         $feelingend = Emoji::whereIn('id', $ids)
-    //                            ->withCount(['feelings' => function($q) use($enddatestart, $enddateend){
-    //                                 return $q->where('feeling_emoji.user_id', Auth::id())
-    //                                         ->whereBetween('feeling_emoji.created_at', [$enddatestart.' 00:00:00',$enddateend.' 23:59:59']);
-    //                             }])->get();
-    //     }
+    public function makePublic($id)
+    {
+        $feel = Feeling::findOrFail($id);
+        $this->authorize('makePublic', $feel);
+        $feel->type = 1;
+        $feel->save();
+        return $this->returnSuccessMessage('Your Note Has Been Made Public', 'F000');   
+    }
 
+    public function delete($id)
+    {
+        $feel = Feeling::findOrFail($id);
+        $this->authorize('delete', $feel);
+        $feel->delete();
+        return $this->returnSuccessMessage('Your Note Has Been Deleted Successfully', 'F000');
+    }   
+    
+    public function like(Request $request)
+    {
+        $feel = Feeling::findOrFail($request->feel_id);
+        $request->validate([
+            'feel_id' => ['required', 'integer']
+        ]);
+        $registatoin_ids = User::where('id', $feel->user_id)->pluck('fcm_token');
+        if(Auth::check()){
+            $likedata = Like::where(["user_id" => Auth::id(), "feeling_id" => $request->feel_id])->get();
+            if(empty($likedata[0]))
+            {
+                $user_id = Auth::id();
+                like::create([
+                    "feeling_id" => $request->feel_id,
+                    "user_id" => $user_id,
+                    "owner_id" => $feel->user_id
+                ]);
+                Notification::create([
+                    'user_id' => $user_id,
+                    "owner_id" => $feel->user_id,
+                    'type_id' => $request->id,
+                    'type' => 'like'
+                ]);
+                
+                $data = [
+                    'title' => 'FeelingSupport',
+                    'body' => Auth::user()->name . ' liked your Note',
+                    'type' => 'like',
+                ];
+                
+                //$this->sendMessageThroughFCM($registatoin_ids, $data);
+            }else {
+                $notification = Notification::where(["user_id" => Auth::id(), "owner_id" => $feel->user_id, "type_id" => $feel->id, 'type' => 'like'])->get();
+                $notification[0]->delete();
+                $likedata[0]->delete();
+            }
+        }else
+        {
+            like::create([
+                "feeling_id" => $request->feel_id,
+                "user_id" => NULL,
+                "owner_id" => $feel->user_id
+            ]);
+            Notification::create([
+                'user_id' => 0,
+                "owner_id" => $feel->user_id,
+                'type_id' => $request->id,
+                'type' => 'like'
+            ]);
+            
+            $data = [
+                'title' => 'FeelingSupport',
+                'body' => 'Anonymous liked your Note',
+                'type' => 'like',
+            ];
+            
+            //$this->sendMessageThroughFCM($registatoin_ids, $data);
+        }
         
-    //     $totalstart = 0;
-    //     $totalend   = 0;
+        return $this->returnSuccessMessage('success', 'F000');
+    }
 
-    //     foreach($feelingstart as $feel)
-    //     {
-    //         $totalstart += $feel->feelings_count;
-    //     }
-    //     foreach($feelingend as $feel)
-    //     {
-    //         $totalend += $feel->feelings_count;
-    //     }
+    public function makeAllPrivate()
+    {
+        $user_id = Auth::id();
+        $feels   = Feeling::where('user_id', $user_id)
+                           ->get();
 
-    //     $types = $feelingstart->map(function($feel) use ($lang){
-    //         $type = 'type_' . $lang;
-    //         return $feel->$type;
-    //     })->toArray();
+        $feels->each(function($feel){
+            $this->authorize('makePrivate', $feel);
+            $feel->type = 0;
+            $feel->save();
+        });
+        return $this->returnSuccessMessage('all feels Has Been Made Private', 'F000');
+    }
 
-    //     $countsStart = $feelingstart->map(function($feel){
-    //         return $feel->feelings_count;
-    //     })->toArray();
+    public function makeAllPublic()
+    {
+        $user_id = Auth::id();
+        $feels   = Feeling::where('user_id', $user_id)
+                           ->get();
 
-    //     $countsEnd = $feelingend->map(function($feel){
-    //         return $feel->feelings_count;
-    //     })->toArray();
+        $feels->each(function($feel){
+            $this->authorize('makePublic', $feel);
+            $feel->type = 1;
+            $feel->save();
+        });
+        return $this->returnSuccessMessage('all feels Has Been Made Public', 'F000');
+    }
 
-
+    public function getNotifications()
+    {
+        $data = Notification::where(function($q){
+                                return $q->whereRaw('IF (`type` = "replay", `user_id` !=' . Auth::id() . ', user_id != ' . Auth::id() . ' and owner_id = '. Auth::id() . ')');
+                            })
+                            ->orWhereIn('replay_id', (array)'replayed_on')
+                            ->orWhere('owner_id', 0)
+                            ->with('owner', 'feeling', 'user')
+                            ->orderBy('created_at', 'DESC')
+                            ->get();
+                    //->whereRaw('IF (`type` = "replay", 1,`user_id` !=' . Auth::id() . ')')
         
+        $data = $data->filter(function($raw){
+            
+            if($raw->user_id == 0 and $raw->owner_id == 0)
+            {
+                $raw->message = __('messages.' . $raw->message);
+            }
+            
+            if($raw->type == 'replay')
+            {
+                $raw->message = __('messages.replayed on comment you participate in');
+                
+                $comment = Comment::find($raw->comment_id);
+                $feel    = Feeling::find($raw->type_id);
+                
+                $feel_user_iddd = $feel->user_id ?? 'nooo';
+                if(auth()->id() == $feel_user_iddd)
+                {
+                    return $raw;
+                }
+                
+                $user_iddd = $comment->user_id ?? 'nooo';
+                if(auth()->id() == $user_iddd)
+                {
+                    $raw->message = __('messages.replayed on your comment');
+                    return $raw;
+                }
+                
+                $comment_typpe = $comment->type ?? 0;
+                $ccidd = $comment->id ?? 'noo';
+                // $repids = Comment::select('users.id')->join('users', 'users.id','=','comments.user_id')->where('parent_id', $ccidd)->distinct()->pluck('users.id')->toarray();
+                $repids = explode(',', $raw->replayed_on_ids);
+                
+                if($comment_typpe)
+                {
+                    if(in_array(auth()->id(), $repids))
+                    {
+                        return $raw;
+                    }
+                    
+                }
+                
+                //return $raw;
+                
+            }else
+            {
+                return $raw;
+            }
+        })->values();
+        
+        return $this->returnData('notifications', $data, 'notification retrived successfully');
+    }
 
-    //     $build = Chartisan::build()
-    //         ->labels($types)
-    //         ->dataset('Feeling', $countsStart)
-    //         ->dataset('Feeling2', $countsEnd);
+    public function reaAllNotification()
+    {
+        $notis   = Notification::where(function($q){
+                                return $q->whereRaw('IF (`type` = "replay", `user_id` !=' . Auth::id() . ',user_id != ' . Auth::id() . ' and owner_id = '. Auth::id() . ')');
+                            })
+                            ->orWhereIn('replay_id', (array)'replayed_on')
+                            ->orWhere('owner_id', 0)
+                            ->get();
 
-    //         return $this->returnData('diary', $build, 'all thanks feelings');
-    // }
+        $notis->each(function($noti){
+            $noti->is_viewed = 1;
+            $noti->save();
+        });
+
+        return $this->returnSuccessMessage('notification read successfully', 'F000');
+    }
+
+    public function getNotificationsCount()
+    {
+        $data = Notification::where(function($q){
+                                return $q->where(function($q){
+                                    return $q->whereRaw('IF (`type` = "replay", `user_id` !=' . Auth::id() . ', user_id != ' . Auth::id() . ' and owner_id = '. Auth::id() . ')');
+                                    })
+                                ->orWhereIn('replay_id', (array)'replayed_on')
+                                ->orWhere('owner_id', 0);
+                            })
+                            ->where('is_viewed', 0)
+                            ->get();
+                            
+        $data = $data->filter(function($raw){
+            if($raw->type == 'replay')
+            {
+                $comment = Comment::find($raw->comment_id);
+                $feel    = Feeling::find($raw->type_id);
+                
+                $feel_user_iddd = $feel->user_id ?? 'nooo';
+                if(auth()->id() == $feel_user_iddd)
+                {
+                    return $raw;
+                }
+                
+                $user_iddd = $comment->user_id ?? 'nooo';
+                if(auth()->id() == $user_iddd)
+                {
+                    return $raw;
+                }
+                
+                $comment_typpe = $comment->type ?? 0;
+                $ccidd = $comment->id ?? 'noo';
+                // $repids = Comment::select('users.id')->join('users', 'users.id','=','comments.user_id')->where('parent_id', $ccidd)->distinct()->pluck('users.id')->toarray();
+                
+                $repids = explode(',', $raw->replayed_on_ids);
+                
+                if($comment_typpe)
+                {
+                    if(in_array(auth()->id(), $repids))
+                    {
+                        return $raw;
+                    }
+                    
+                }
+                
+                //return $raw;
+                
+            }else
+            {
+                return $raw;
+            }
+        });
+
+        return $this->returnData('notification_count', $data->count(), 'count of notification');
+    }
     
+    public function clearAllNotification()
+    {
+        $notis   = Notification::where(function($q){
+                                return $q->where('owner_id', Auth::id());
+                            })
+                            ->where('user_id', '!=', Auth::id())
+                            ->get();
+        $notis->each(function($noti){
+            $noti->delete();
+        });
+        
+        return $this->returnSuccessMessage('notifications cleard successfully', 'F000');
+    }
+
+
+
 }
