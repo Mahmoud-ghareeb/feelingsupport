@@ -47,12 +47,12 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('clear-all', [ApiController::class, 'clearAllNotification']);
     Route::get('notification/count', [ApiController::class, 'getNotificationsCount']);
 
-    Route::get('/profile', [ProfileController::class, 'profile']);
+    Route::get('/profile', [ApiController::class, 'profile']);
     Route::group(['prefix' => 'update',], function(){
-        Route::post('email', [ProfileController::class, 'updateEmail']);
-        Route::post('info', [ProfileController::class, 'updateInfo']);
-        Route::post('password', [ProfileController::class, 'updatePassword']);
-        Route::post('picture', [ProfileController::class, 'updatePicture']);
+        Route::post('email', [ApiController::class, 'updateEmail']);
+        Route::post('info', [ApiController::class, 'updateInfo']);
+        Route::post('password', [ApiController::class, 'updatePassword']);
+        Route::post('picture', [ApiController::class, 'updatePicture']);
     });
 
 });
