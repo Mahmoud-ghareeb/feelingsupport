@@ -513,6 +513,70 @@ class ApiController extends Controller
         return $this->returnSuccessMessage('notifications cleard successfully', 'F000');
     }
 
+    public function profile()
+    {
+        $user = Auth::user();
+        return $this->returnData('user_info', $user, 'user info for profile page');
+    }
 
+    public function updateEmail(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        ],[
+            'email.unique' => __('messages.The email has already been taken')    
+        ]);
+        $id = Auth::id();
+        $user = User::findOrFail($id);
+        $user->email = $request->email;
+        $user->save();
+        return $this->returnSuccessMessage('Email Updated Successfully', 'F000');
+    }
+    
+    public function updateInfo(Request $request)
+    {
+        $request->validate([
+            'first_name' => ['required', 'string', 'max:50'],
+            'last_name' => ['required', 'string', 'max:50']
+        ]);
+        $id = Auth::id();
+        $user = User::findOrFail($id);
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->save();
+        return $this->returnSuccessMessage('Info Updated Successfully', 'F000');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'string', 'max:255']
+        ],[
+            'password.required' => __("messages.you must type a password"),    
+        ]);
+        $id = Auth::id();
+        $user = User::findOrFail($id);
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return $this->returnSuccessMessage('Password Updated Successfully', 'F000');
+    }
+
+    public function updatePicture(Request $request)
+    {
+        $request->validate([
+            'picture' => ['required', 'image']
+        ],[
+            'picture.required' => __("messages.you must choose an image"),
+            'picture.image' => __("messages.this file must be an image"),
+        ]);
+        $id = Auth::id();
+        $user = User::findOrFail($id);
+
+        $image = $this->saveImage($request->picture, 'assets/images/profiles');
+
+        $user->picture = $image;
+        $user->save();
+        return $this->returnSuccessMessage('Profile Picture Updated Successfully', 'F000');
+    }
 
 }
