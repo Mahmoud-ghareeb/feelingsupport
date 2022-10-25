@@ -10,21 +10,21 @@ trait Responseable
         return app()->getLocale();
     }
 
-    public function returnError($errNum, $msg)
+    public function returnError($status_code, $msg)
     {
         return response()->json([
             'status' => false,
-            'errNum' => $errNum,
-            'msg' => $msg
+            'status_code' => $status_code,
+            'message' => $msg
         ]);
     }
 
-    public function returnSuccessMessage($msg = "", $errNum = "S000")
+    public function returnSuccessMessage($msg = "", $status_code = "S000")
     {
         return [
             'status' => true,
-            'errNum' => $errNum,
-            'msg' => $msg
+            'status_code' => $status_code,
+            'message' => $msg
         ];
     }
 
@@ -32,8 +32,8 @@ trait Responseable
     {
         return response()->json([
             'status' => true,
-            'errNum' => "F000",
-            'msg' => $msg,
+            'status_code' => "F000",
+            'message' => $msg,
             $key => $value
         ]);
     }
