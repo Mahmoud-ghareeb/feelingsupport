@@ -108,7 +108,7 @@ class ApiController extends Controller
             case 'save and share': 
                 $data->type = 1;
                 $data->save();
-                return $this->returnSuccessMessage('stored and shared successfully', 'F001');
+                return $this->returnSuccessMessage('stored and shared successfully', 'F000');
             break;
         }
     }
