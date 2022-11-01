@@ -581,7 +581,7 @@ class ApiController extends Controller
         return $this->returnSuccessMessage('Profile Picture Updated Successfully', 'F000');
     }
 
-    public function showComments($username, $id)
+    public function showComments($id)
     {
         if(auth()->check()){
             $user_id = Auth::id();
