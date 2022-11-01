@@ -55,6 +55,16 @@ Route::group(['middleware' => 'auth:api'], function(){
         Route::post('picture', [ApiController::class, 'updatePicture']);
     });
 
+    Route::group(["prefix" => '{feel_id}/comments'], function($feel_id){
+        Route::post('store-comment', [ApiController::class, 'storeComment']);
+        Route::post('{comment_id}/reply', [ApiController::class, 'replay']);
+        Route::get('delete/{comment_id}', [ApiController::class, 'deleteComment']);
+        Route::get('public/{comment_id}', [ApiController::class, 'makeCommentPublic']);
+        Route::get('private/{comment_id}', [ApiController::class, 'makeCommentPrivate']);
+        Route::get('all/puplic', [ApiController::class, 'makeAllCommentsPublic']);
+        Route::get('all/private', [ApiController::class, 'makeAllCommentsPrivate']);
+    });
+
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
