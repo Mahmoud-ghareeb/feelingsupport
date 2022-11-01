@@ -58,11 +58,11 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::group(["prefix" => '{feel_id}/comments'], function($feel_id){
         Route::post('store-comment', [ApiController::class, 'storeComment']);
         Route::post('{comment_id}/reply', [ApiController::class, 'replay']);
-        Route::get('delete/{comment_id}', [ApiController::class, 'deleteComment']);
-        Route::get('public/{comment_id}', [ApiController::class, 'makeCommentPublic']);
-        Route::get('private/{comment_id}', [ApiController::class, 'makeCommentPrivate']);
-        Route::get('all/puplic', [ApiController::class, 'makeAllCommentsPublic']);
-        Route::get('all/private', [ApiController::class, 'makeAllCommentsPrivate']);
+        Route::post('delete/{comment_id}', [ApiController::class, 'deleteComment']);
+        Route::post('public/{comment_id}', [ApiController::class, 'makeCommentPublic']);
+        Route::post('private/{comment_id}', [ApiController::class, 'makeCommentPrivate']);
+        Route::post('all/puplic', [ApiController::class, 'makeAllCommentsPublic']);
+        Route::post('all/private', [ApiController::class, 'makeAllCommentsPrivate']);
     });
 
 });
