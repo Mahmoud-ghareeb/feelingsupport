@@ -1,28 +1,41 @@
 $(document).ready(function(){
 
+    // function emoclick(dataid, dp) {
+    //     if(dp == 'far'){
+    //         $(".emoji" + dataid).attr('data-prefix', 'fas').ready(function(){
+    //             $(".emoji" + dataid).on('click', function(){
+    //                 var dataid = $(this).attr('data-id');
+    //                 var dp = $(this).attr('data-prefix');
+    //                 emoclick(dataid, dp)
+    //             });
+    //         });
+    //     }else{
+    //         $(".emoji" + dataid).attr('data-prefix', 'far').ready(function(){
+    //             $(".emoji" + dataid).on('click', function(){
+    //                 var dataid = $(this).attr('data-id');
+    //                 var dp = $(this).attr('data-prefix');
+    //                 emoclick(dataid, dp)
+    //             });
+    //         });
+    //     }
+    //     //$(this).toggleClass('fa-regular');
+    //     var ids = "";
+    //     $(".emmo-select").each(function() {
+    //         var clas = $(this).attr('data-prefix');
+    //         var dataid = $(this).attr('data-id');
+    //         if(clas.indexOf('fas') != -1){
+    //             ids += (dataid + ",");
+    //         }
+    //     });
+    //     ids = ids.slice(0,-1);
+    //     $("#feel_id").val(ids);
+    // }
 
-    $(".emmo-select").on('click', function() {
-        // var classes = $(this).attr('class').split(" ");
-        // if(classes[1].indexOf('-fill') == -1){
-        //     classes[1] += '-fill';
-        // }else{
-        //     classes[1] = classes[1].replace("-fill", "");
-        // }
-        // $(this).removeClass();
-        // $(this).addClass(classes);
-        $(this).toggleClass('fa-solid');
-        $(this).toggleClass('fa-regular');
-        var ids = "";
-        $(".emmo-select").each(function() {
-            var clas = $(this).attr('class');
-            var dataid = $(this).attr('data-id');
-            if(clas.indexOf('-solid') != -1){
-                ids += (dataid + ",");
-            }
-        });
-        ids = ids.slice(0,-1);
-        $("#feel_id").val(ids);
-    });
+    // $(".emmo-select").on('click', function(){
+    //     var dataid = $(this).attr('data-id');
+    //     var dp = $(this).attr('data-prefix');
+    //     emoclick(dataid, dp)
+    // });
 
     // $(".dropdown-togle").on('click', function(e) {
     //     e.preventDefault();
@@ -38,7 +51,20 @@ $(document).ready(function(){
     // });
 
 
-
+    $(".emmo-select").on('click', function() {
+        $(this).toggleClass('fa-solid');
+        $(this).toggleClass('fa-regular');
+        var ids = "";
+        $(".emmo-select").each(function() {
+            var clas = $(this).attr('class');
+            var dataid = $(this).attr('data-id');
+            if(clas.indexOf('-solid') != -1){
+                ids += (dataid + ",");
+            }
+        });
+        ids = ids.slice(0,-1);
+        $("#feel_id").val(ids);
+    });
     
 
     $(".open-replay-modal").on('click', function(){

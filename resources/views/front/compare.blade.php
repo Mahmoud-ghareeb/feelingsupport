@@ -29,7 +29,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                 <div class="emmo-div" style="position: relative;display: flex;">
                     @foreach($emojis as $key => $emoji)
                         <div class="emmo-group">
-                            <i class="fa-regular {{$emoji->css_class}} emmo-size emmo-select emmo-alter" data-id="{{$emoji->id}}" style="-webkit-text-stroke: 0.5px white;color: <?php echo $emoji->color ?>"></i>   
+                            <i class="fa-regular {{$emoji->css_class}} emmo-size emmo-select" data-id="{{$emoji->id}}" style="-webkit-text-stroke: 0.5px white;font-size: 38px;color: <?php echo $emoji->color ?>"></i>   
                             <p class="emmo-text" style="color: <?php echo $emoji->color; ?>; margin-top: 7px;">
                             <?php 
                                 $la = app()->getLocale();
@@ -60,7 +60,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                                         @foreach($emojis as $key => $emoji)
                                             @if($key > 3)
                                                 <div class="emmo-group clearfix">
-                                                    <i class="fa-regular {{$emoji->css_class}} emmo-size emmo-select" data-id="{{$emoji->id}}" style="-webkit-text-stroke: 0.5px white;color: <?php echo $emoji->color ?>"></i>   
+                                                    <i class="fa-regular {{$emoji->css_class}} emmo-size emmo-select" data-id="{{$emoji->id}}" style="-webkit-text-stroke: 0.5px white; font-size: 38px; color: <?php echo $emoji->color ?>"></i>   
                                                     <p class="emmo-text" style="color: <?php echo $emoji->color; ?>; margin-top: 7px;">
                                                     <?php 
                                                         $la = app()->getLocale();

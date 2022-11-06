@@ -20,7 +20,6 @@
 <script src="{{ asset('assets/backend/js/pages/demo.summernote.js'); }}"></script>
 <script src="{{ asset('assets/backend/js/vendor/dropzone.js'); }}"></script>
 <script src="{{ asset('assets/backend/js/pages/datatable-initializer.js'); }}"></script>
-<script src="{{ asset('assets/backend/js/font-awesome-icon-picker/fontawesome-iconpicker.min.js'); }}" charset="utf-8"></script>
 <script src="{{ asset('assets/backend/js/vendor/bootstrap-tagsinput.min.js');}}" charset="utf-8"></script>
 <script src="{{ asset('assets/backend/js/bootstrap-tagsinput.min.js'); }}"></script>
 <script src="{{ asset('assets/backend/js/vendor/dropzone.min.js');}}" charset="utf-8"></script>
@@ -35,6 +34,8 @@
 <script src="{{ asset('assets/global/jquery-form/jquery.form.min.js'); }}"></script>
 
 <script src="{{ asset('assets/backend/js/custom.js');}}"></script>
+
+<link rel="stylesheet" href="{{ asset('assets/css/all.css') }}">
 
 <script type="text/javascript">
   $(document).ready(function() {
