@@ -62,9 +62,12 @@ Route::group(['middleware' => 'auth:api'], function(){
         Route::post('delete/{comment_id}', [ApiController::class, 'deleteComment']);
         Route::post('public/{comment_id}', [ApiController::class, 'makeCommentPublic']);
         Route::post('private/{comment_id}', [ApiController::class, 'makeCommentPrivate']);
-        Route::post('all/puplic', [ApiController::class, 'makeAllCommentsPublic']);
+        Route::post('all/public', [ApiController::class, 'makeAllCommentsPublic']);
         Route::post('all/private', [ApiController::class, 'makeAllCommentsPrivate']);
     });
+
+    Route::post('share/comment-image', [ApiController::class, 'uploadBaseImage']);
+    Route::post('share/chart-image', [ApiController::class, 'uploadChartImage']);
 
 });
 

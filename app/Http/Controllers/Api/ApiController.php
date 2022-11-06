@@ -14,13 +14,13 @@ use App\Models\Notification;
 use App\Models\User;
 use App\Traits\Imageable;
 use App\Traits\Responseable;
-use Chartisan\PHP\Chartisan;
+use App\Traits\Shareable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
 {
-    use Responseable, Imageable;
+    use Responseable, Imageable, Shareable;
 
     // public function language(Request $request){
     //     $lang = $request->lang;
@@ -813,6 +813,79 @@ class ApiController extends Controller
         $feel->save();
 
         return $this->returnSuccessMessage('all comments Has Been Made public', 'F000');
+    }
+
+    public function uploadBaseImage(Request $request)
+    {
+        $user_id   = Auth::id();
+        $user_name = Auth::user()->name; 
+
+        $image_s = $this->saveSharedImage($request->imagedata);
+
+        $data = Feeling::create([
+            "reason"  => $request->reason ,
+            "image"   => $image_s,
+            "category" => "thanks",
+            "user_id" => $user_id,
+            "type" => "1"
+        ]);
+        
+        $data = ['user_name' => $user_name, 'id' => $data->id];
+        return $this->returnData('data', $data, 'info to construct the link of the feeling');
+    }
+
+    public function uploadChartImage(Request $request)
+    {
+        $user_id   = Auth::id();
+        $user_name = Auth::user()->name; 
+
+        $image_s = $this->saveSharedImage($request->imagedata);
+        if($request->startdatestart)
+        {
+            $startdatestart = $request->startdatestart;
+            $startdateend   = $request->startdateend;
+            $enddatestart   = $request->enddatestart;
+            $enddateend   = $request->enddateend;
+            $period = "";
+            if($startdatestart == $startdateend)
+            {
+                $period = " ( " . $startdateend . " ) ";
+            }else
+            {
+                $period = " ( " . $startdatestart . " => " . $startdateend . " ) ";
+            }
+            $period .= " , ";
+            if($enddatestart == $enddateend)
+            {
+                $period .= " ( " . $enddateend . " ) ";
+            }else
+            {
+                $period .= " ( " . $enddatestart . " => " . $enddateend . " ) ";
+            }
+        }else
+        {
+            $datestart = $request->datestart;
+            $dateend   = $request->dateend;
+            $period = "";
+            if($datestart == $dateend)
+            {
+                $period = " ( " . $datestart . " ) ";
+            }else
+            {
+                $period = " ( " . $datestart . " => " . $dateend . " ) ";
+            }
+        }
+        
+        $data = Feeling::create([
+            "reason"  => $request->reason,
+            "image"   => $image_s,
+            "category" => "statistics",
+            "user_id" => $user_id,
+            "type" => "1"
+        ]);
+        
+        $data = ['user_name' => $user_name, 'id' => $data->id];
+        return $this->returnData('data', $data, 'info to construct the link of the feeling');
     }
 
 }
