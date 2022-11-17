@@ -230,7 +230,9 @@
 @section('scripts')
     @if (Session::has('success'))
         <script>
+            
             $(document).ready(function(){
+                alert(1);
                 swal({text:"{{ Session::get('success') }}", button: "{{__('messages.ok')}}"});
             });
             
