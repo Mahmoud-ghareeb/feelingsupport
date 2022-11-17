@@ -840,41 +840,41 @@ class ApiController extends Controller
         $user_name = Auth::user()->name; 
 
         $image_s = $this->saveSharedImage($request->imagedata);
-        if($request->startdatestart)
-        {
-            $startdatestart = $request->startdatestart;
-            $startdateend   = $request->startdateend;
-            $enddatestart   = $request->enddatestart;
-            $enddateend   = $request->enddateend;
-            $period = "";
-            if($startdatestart == $startdateend)
-            {
-                $period = " ( " . $startdateend . " ) ";
-            }else
-            {
-                $period = " ( " . $startdatestart . " => " . $startdateend . " ) ";
-            }
-            $period .= " , ";
-            if($enddatestart == $enddateend)
-            {
-                $period .= " ( " . $enddateend . " ) ";
-            }else
-            {
-                $period .= " ( " . $enddatestart . " => " . $enddateend . " ) ";
-            }
-        }else
-        {
-            $datestart = $request->datestart;
-            $dateend   = $request->dateend;
-            $period = "";
-            if($datestart == $dateend)
-            {
-                $period = " ( " . $datestart . " ) ";
-            }else
-            {
-                $period = " ( " . $datestart . " => " . $dateend . " ) ";
-            }
-        }
+        // if($request->startdatestart)
+        // {
+        //     $startdatestart = $request->startdatestart;
+        //     $startdateend   = $request->startdateend;
+        //     $enddatestart   = $request->enddatestart;
+        //     $enddateend   = $request->enddateend;
+        //     $period = "";
+        //     if($startdatestart == $startdateend)
+        //     {
+        //         $period = " ( " . $startdateend . " ) ";
+        //     }else
+        //     {
+        //         $period = " ( " . $startdatestart . " => " . $startdateend . " ) ";
+        //     }
+        //     $period .= " , ";
+        //     if($enddatestart == $enddateend)
+        //     {
+        //         $period .= " ( " . $enddateend . " ) ";
+        //     }else
+        //     {
+        //         $period .= " ( " . $enddatestart . " => " . $enddateend . " ) ";
+        //     }
+        // }else
+        // {
+        //     $datestart = $request->datestart;
+        //     $dateend   = $request->dateend;
+        //     $period = "";
+        //     if($datestart == $dateend)
+        //     {
+        //         $period = " ( " . $datestart . " ) ";
+        //     }else
+        //     {
+        //         $period = " ( " . $datestart . " => " . $dateend . " ) ";
+        //     }
+        // }
         
         $data = Feeling::create([
             "reason"  => $request->reason,

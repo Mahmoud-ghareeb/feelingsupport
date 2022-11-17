@@ -483,7 +483,7 @@
                     var dataUrl = canvas.toDataURL();
                      var text = $("#commentShare").val();
                     var imagedata = dataUrl.replace(/^data:image\/(png|jpg);base64,/,"");
-                    console.log(imagedata);
+                    
                     $.ajax({
                             
                         type:"POST",
