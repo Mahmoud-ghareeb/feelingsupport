@@ -122,6 +122,7 @@ class ApiController extends Controller
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
+                        ->with('comments')
                         ->withCount('comments', 'likes')
                         ->where('user_id', $user_id)
                         ->orderby('created_at', 'desc')
