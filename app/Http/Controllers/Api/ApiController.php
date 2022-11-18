@@ -122,8 +122,9 @@ class ApiController extends Controller
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
-                        ->with('comments')
-                        ->with('childrenRecursive')
+                        ->with('comments', function($q){
+                            return $q->with('childrenRecursive');
+                        })
                         ->withCount('comments', 'likes')
                         ->where('user_id', $user_id)
                         ->orderby('created_at', 'desc')
