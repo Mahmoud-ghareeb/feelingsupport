@@ -123,7 +123,7 @@ class ApiController extends Controller
                             return $q->where('user_id', $user_id);
                         }])
                         ->with('comments', function($q){
-                            return $q->with('childrenRecursive');
+                            return $q->with('children');
                         })
                         ->withCount('comments', 'likes')
                         ->where('user_id', $user_id)
