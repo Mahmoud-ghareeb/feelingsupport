@@ -79,7 +79,7 @@ class ApiController extends Controller
 
     public function emojis($lang)
     {
-        $emojis = Emoji::select('id', 'css_class', 'color', 'type_' . $lang . 'as type')->orderBy('raw_order')->get();
+        $emojis = Emoji::select('id', 'css_class', 'color', 'type_' . $lang . ' as type')->orderBy('raw_order')->get();
         return $this->returnData('emojis', $emojis, 'all emojis');
     }
     
