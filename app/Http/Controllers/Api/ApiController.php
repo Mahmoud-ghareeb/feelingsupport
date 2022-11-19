@@ -123,7 +123,11 @@ class ApiController extends Controller
                             return $q->where('user_id', $user_id);
                         }])
                         ->with('comments', function($q){
-                            return $q->with('children');
+                            $q->with('user');
+                            $q->with('children', function($cq){
+                                    return $cq->with('user');
+                            });
+                            return $q;
                         })
                         ->withCount('comments', 'likes')
                         ->where('user_id', $user_id)
