@@ -34,11 +34,6 @@ class Feeling extends Model
         return $this->hasMany('App\Models\Comment', 'feeling_id', 'id');
     }
 
-    public function childrenRecursive()
-    {
-        return $this->comments()->with('children');
-    }
-
     public function likes()
     {
         return $this->hasMany('App\Models\Like', 'feeling_id', 'id');
