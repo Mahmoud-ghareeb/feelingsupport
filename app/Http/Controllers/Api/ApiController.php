@@ -130,6 +130,7 @@ class ApiController extends Controller
                             return $q->where('user_id', $user_id);
                         }])
                         ->with('comments', function($q){
+                            $q->whereRaw('parent_id IS NULL');
                             $q->with('user');
                             $q->with('children', function($cq){
                                     return $cq->with('user');
