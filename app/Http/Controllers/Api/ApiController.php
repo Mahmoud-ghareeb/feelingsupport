@@ -122,7 +122,7 @@ class ApiController extends Controller
         $nn = "";
         foreach($cats as $cat)
         {
-            $nn .= $cat . ',';
+            $nn .= $cat->category . ',';
         }
         $feels = Feeling::with('emojis:id,css_class,color,type_' . $lang . ' as type', 'user')
                         ->with(['likes' => function($q) use ($user_id){
