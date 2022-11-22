@@ -119,6 +119,11 @@ class ApiController extends Controller
     {
         $user_id = Auth::id();
         $cats = Feeling::select('category')->distinct()->get();
+        $nn = "";
+        foreach($cats as $cat)
+        {
+            $nn .= $cat . ',';
+        }
         $feels = Feeling::with('emojis:id,css_class,color,type_' . $lang . ' as type', 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
@@ -134,7 +139,7 @@ class ApiController extends Controller
                         ->where('user_id', $user_id)
                         ->orderby('created_at', 'desc')
                         ->get();
-        return $this->returnData('diary', $cats, 'all feelings in descending order');
+        return $this->returnData('diary', $feels, $nn);
     }
 
     public function diaryAsc($lang)
