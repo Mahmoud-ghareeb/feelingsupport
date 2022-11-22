@@ -118,7 +118,7 @@ class ApiController extends Controller
     public function diary($lang)
     {
         $user_id = Auth::id();
-        $cats = Feeling::select('category')->distinct()->get()->toArray();
+        $cats = Feeling::select('category')->distinct()->get();
         $feels = Feeling::with('emojis:id,css_class,color,type_' . $lang . ' as type', 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
