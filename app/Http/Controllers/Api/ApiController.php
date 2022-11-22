@@ -124,6 +124,7 @@ class ApiController extends Controller
         {
             $nn .= $cat->category . ',';
         }
+        $nn = substr($nn, 0, -1);
         $feels = Feeling::with('emojis:id,css_class,color,type_' . $lang . ' as type', 'user')
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
