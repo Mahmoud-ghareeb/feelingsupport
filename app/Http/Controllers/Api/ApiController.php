@@ -151,6 +151,14 @@ class ApiController extends Controller
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
+                        ->with('comments', function($q){
+                            $q->whereRaw('parent_id IS NULL');
+                            $q->with('user');
+                            $q->with('children', function($cq){
+                                    return $cq->with('user');
+                            });
+                            return $q;
+                        })
                         ->withCount('comments', 'likes')
                         ->where('user_id', $user_id)
                         ->orderby('created_at', 'asc')
@@ -166,6 +174,14 @@ class ApiController extends Controller
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
+                        ->with('comments', function($q){
+                            $q->whereRaw('parent_id IS NULL');
+                            $q->with('user');
+                            $q->with('children', function($cq){
+                                    return $cq->with('user');
+                            });
+                            return $q;
+                        })
                         ->withCount('comments', 'likes')
                         ->where('user_id', $user_id)
                         ->whereBetween('created_at', [$date.' 00:00:00',$date.' 23:59:59'])
@@ -181,6 +197,14 @@ class ApiController extends Controller
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
+                        ->with('comments', function($q){
+                            $q->whereRaw('parent_id IS NULL');
+                            $q->with('user');
+                            $q->with('children', function($cq){
+                                    return $cq->with('user');
+                            });
+                            return $q;
+                        })
                         ->withCount('comments', 'likes')
                         ->where('user_id', $user_id)
                         ->orderby('comments_count', 'desc')
@@ -196,6 +220,14 @@ class ApiController extends Controller
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
+                        ->with('comments', function($q){
+                            $q->whereRaw('parent_id IS NULL');
+                            $q->with('user');
+                            $q->with('children', function($cq){
+                                    return $cq->with('user');
+                            });
+                            return $q;
+                        })
                         ->withCount('comments', 'likes')
                         ->where('user_id', $user_id)
                         ->where('type', 1)
@@ -212,6 +244,14 @@ class ApiController extends Controller
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
+                        ->with('comments', function($q){
+                            $q->whereRaw('parent_id IS NULL');
+                            $q->with('user');
+                            $q->with('children', function($cq){
+                                    return $cq->with('user');
+                            });
+                            return $q;
+                        })
                         ->withCount('comments', 'likes')
                         ->where('user_id', $user_id)
                         ->where('type', 0)
