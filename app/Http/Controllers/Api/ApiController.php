@@ -268,6 +268,14 @@ class ApiController extends Controller
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
+                        ->with('comments', function($q){
+                            $q->whereRaw('parent_id IS NULL');
+                            $q->with('user');
+                            $q->with('children', function($cq){
+                                    return $cq->with('user');
+                            });
+                            return $q;
+                        })
                         ->withCount('comments', 'likes')
                         ->where('user_id', $user_id)
                         ->where('category', 'me')
@@ -283,6 +291,14 @@ class ApiController extends Controller
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
+                        ->with('comments', function($q){
+                            $q->whereRaw('parent_id IS NULL');
+                            $q->with('user');
+                            $q->with('children', function($cq){
+                                    return $cq->with('user');
+                            });
+                            return $q;
+                        })
                         ->withCount('comments', 'likes')
                         ->where('user_id', $user_id)
                         ->where('category', 'statistics')
@@ -298,6 +314,14 @@ class ApiController extends Controller
                         ->with(['likes' => function($q) use ($user_id){
                             return $q->where('user_id', $user_id);
                         }])
+                        ->with('comments', function($q){
+                            $q->whereRaw('parent_id IS NULL');
+                            $q->with('user');
+                            $q->with('children', function($cq){
+                                    return $cq->with('user');
+                            });
+                            return $q;
+                        })
                         ->withCount('comments', 'likes')
                         ->where('user_id', $user_id)
                         ->where('category', 'thanks')
