@@ -15,8 +15,10 @@ use App\Models\User;
 use App\Traits\Imageable;
 use App\Traits\Responseable;
 use App\Traits\Shareable;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ApiController extends Controller
 {
@@ -69,6 +71,83 @@ class ApiController extends Controller
             return $this->returnError('F413', 'Unauthorised');
         }
 
+    }
+
+    public function facebookCallback(Request $request)
+    {
+        $this->validate($request,[
+            'id'=>'required',
+            'user_name'=>'required',
+            'email'=>'unique:users,email',
+            'avatar'=>'string'
+            ]);
+
+        $user = $request->user_name;
+        $finduser = User::where('name', $request->id)->first();
+        $first_name = explode(' ', $user)[0];
+        $last_name  = explode(' ', $user)[1];
+        
+        if($finduser)
+        {
+            $user = User::find($finduser->id);
+            $token = $user->createToken('Token')->accessToken; 
+            $user->token = $token;
+            return $this->returnData('data', $user, 'user data');
+        }else{
+            $user_email = $request->email;
+            if(empty($request->email)){
+                $user_email = $user->id . '@fakefeelingsupport.com';
+            }
+            $newUser = User::create([
+                            'name' => $request->id,
+                            'first_name' => $first_name,
+                            'last_name' => $last_name,
+                            'email' => $user_email,
+                            'picture' => $request->avatar,
+                            'password' => Hash::make($request->id . $request->email),
+                        ]);
+            
+            $token = $newUser->createToken('Token')-> accessToken;
+            $newUser->token = $token;
+            return $this->returnData('data', $newUser, 'user data');
+        }
+    }
+
+    public function googleCallback(Request $request)
+    {
+        $this->validate($request,[
+            'id'=>'required',
+            'user_name'=>'required',
+            'email'=>'unique:users,email',
+            'avatar'=>'string'
+            ]);
+
+        $user = $request->user_name;
+        $finduser = User::where('name', $request->id)->first();;
+        $first_name = explode(' ', $user)[0];
+        $last_name  = explode(' ', $user)[1];
+        if($finduser)
+        {
+            $user = User::find($finduser->id);
+            $token = $user->createToken('Token')->accessToken; 
+            $user->token = $token;
+            return $this->returnData('data', $user, 'user data');
+        }else{
+
+            
+            $newUser = User::create([
+                            'name' => $request->id,
+                            'first_name' => $first_name,
+                            'last_name' => $last_name,
+                            'email' => $request->email,
+                            'picture' => $request->avatar,
+                            'password' => Hash::make($request->id . $request->email),
+                        ]);
+            
+            $token = $newUser->createToken('Token')-> accessToken;
+            $newUser->token = $token;
+            return $this->returnData('data', $newUser, 'user data');
+        }
     }
 
     // public function emojis()
