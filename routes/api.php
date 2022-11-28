@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [ApiController::class, 'registration']);
 Route::post('login', [ApiController::class, 'login']);
 
+Route::post('facebook/login', [ApiController::class, 'facebookCallback']);
+Route::post('google/login', [ApiController::class, 'googleCallback']);
+
 
 Route::group(['middleware' => 'auth:api'], function(){
     
