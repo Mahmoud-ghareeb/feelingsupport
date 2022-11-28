@@ -78,7 +78,7 @@ class ApiController extends Controller
         $this->validate($request,[
             'id'=>'required',
             'user_name'=>'required',
-            'email'=>'unique:users,email',
+            'email'=>'email',
             'avatar'=>'string'
             ]);
 
