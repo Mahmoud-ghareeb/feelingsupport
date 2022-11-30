@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
+    <meta name="description" content="feelingsupport is the first social network dedicated to supporting human feelings where you can save your feelings privately or share them on any social network like facebook, twitter, instagram, snap, whatsapp etc, to get support from your friends">
+
     <meta property="og:image" content="{{ asset('assets/images/logo.png') }}">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="667">
@@ -11,6 +13,16 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGVNBX0X0S"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ZGVNBX0X0S');
+    </script>
 
     <title>{{ config('app.name', 'FeelingSupport') }}</title>
     <link rel="shortcut icon" href="{{asset('assets/images/dislike.png')}}" type="image/x-icon">
