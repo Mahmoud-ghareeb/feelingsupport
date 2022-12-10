@@ -606,7 +606,7 @@
                 $.ajax({
                             
                     type:"POST",
-                    url: "/feelingsupport/feelings/share/" + id,
+                    url: "/feelings/share/" + id,
                     data:{
                         "_token": "{{ csrf_token() }}"
                     },
