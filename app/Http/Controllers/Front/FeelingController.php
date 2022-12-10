@@ -358,24 +358,24 @@ class FeelingController extends Controller
         }
     }
 
-    public function share($user_name, $id)
+    public function share($id)
     {
         $feeling = Feeling::findOrFail($id);
         $this->authorize('share', $feeling);
 
         $feeling->type = 1;
         $feeling->save();
-        $shareComponent = ShareFacade::page(
-            env('APP_URL') . '/feelings/feel/' . $user_name . '/' . $id,
-            'support him please!!',
-        )
-        ->facebook()
-        ->twitter()
-        ->telegram()
-        ->whatsapp()
-        ->pinterest();
+        // $shareComponent = ShareFacade::page(
+        //     env('APP_URL') . '/feelings/feel/' . $user_name . '/' . $id,
+        //     'support him please!!',
+        // )
+        // ->facebook()
+        // ->twitter()
+        // ->telegram()
+        // ->whatsapp()
+        // ->pinterest();
         
-        return view('front.share', compact('shareComponent'));
+        return response()->json('done');
     }
 
     public function shareDiary($user_name, $id)

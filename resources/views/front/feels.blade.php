@@ -202,7 +202,7 @@
                     </div>
                     <div class="col-4">
                         <!--{{route('feeling.share.diary', [$feel->user->name, $feel->id])}}-->
-                        <a href="javascript:void(0)"><i class="fa-regular fa-share-from-square share-outside interact-icons" style="font-size: 17px;" id="s{{ $feel->id }}" data-url="{{route('feeling.show', [$feel->user->name, $feel->id])}}"></i></a><p>{{__('messages.share')}}</p>
+                        <a href="javascript:void(0)"><i class="fa-regular fa-share-from-square share-outside interact-icons" style="font-size: 17px;" id="s{{ $feel->id }}" data-id="{{$feel->id}}" data-url="{{route('feeling.show', [$feel->user->name, $feel->id])}}"></i></a><p>{{__('messages.share')}}</p>
                     </div>
                     
                 </div>
@@ -359,6 +359,23 @@
             
             $(".share-outside").on('click', function(){
                
+                let id = $(this).data('id');
+                $.ajax({
+                            
+                    type:"POST",
+                    url: "/feelingsupport/feelings/share/" + id,
+                    data:{
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function(data){
+                        console.log(data);
+                    },
+                    error: function(err){
+                        console.log(err);
+                    }
+                        
+                });
+
                 var tx = $(this).data('url');
                 tx = tx.replace('/<?php echo app()->getLocale() ?>/', '/')
                

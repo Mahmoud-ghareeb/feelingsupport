@@ -84,7 +84,7 @@ Route::group(
             Route::get('{username}', [FeelingController::class, 'showUserNotes'])->name('user');
             
             Route::post('store', [FeelingController::class, 'store'])->name('store');
-            Route::get('share/{username}/{id}', [FeelingController::class, 'share'])->name('share');
+            Route::post('share/{id}', [FeelingController::class, 'share'])->name('share');
             Route::get('share-diary/{username}/{id}', [FeelingController::class, 'shareDiary'])->name('share.diary');
             Route::get('feel/{username}/{id}', [FeelingController::class, 'show'])->name('show');
             Route::get('feel/view/{username}/{id}/{noti_id}', [FeelingController::class, 'viewThenShow'])->name('view.show');

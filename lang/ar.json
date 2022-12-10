@@ -1,3 +1,8 @@
 {
-    "Reset Password": "تحديث كلمة المرور"
+    "Reset Password": "تحديث كلمة المرور",
+    "Email Address": "البريد الالكتروني",
+    "Send Password Reset Link": "Send Password Reset Link",
+    "Confirm Password": "تاكيد كلمة المرور",
+    "Password": "كلمة المرور",
+    "Please confirm your password before continuing.": "Please confirm your password before continuing."
 }

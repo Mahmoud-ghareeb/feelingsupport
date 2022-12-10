@@ -14,16 +14,6 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGVNBX0X0S"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-ZGVNBX0X0S');
-    </script>
-
     <title>{{ config('app.name', 'FeelingSupport') }}</title>
     <link rel="shortcut icon" href="{{asset('assets/images/dislike.png')}}" type="image/x-icon">
     <!-- Scripts -->
@@ -252,162 +242,162 @@
         </div>  
     </div>
     <footer class="bg-light text-center text-lg-start">
-  <!-- Grid container -->
-  <div class="container p-4" >
-    <!--Grid row-->
-    <div class="row">
-      <!--Grid column-->
-      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-        <p>{{__('messages.footer head 1')}}</p>
-        <p style="font-weight: 200;">{{__('messages.footer body 1')}}</p>
-      </div>
-      <!--Grid column-->
-      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-        <p>{{__('messages.footer head 2')}}</p>
-        <p style="font-weight: 200;">{{__('messages.footer body 2')}}</p>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-        <p >{{__('messages.footer head 3')}}</p>
-        <p style="font-weight: 200;">{{__('messages.footer body 3')}}</p>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-        <p>{{__('messages.footer head 4')}}</p>
-        <p style="font-weight: 200;">{{__('messages.footer body 4')}}</p>
-      </div>
-      <!--Grid column-->
-    </div>
-    <!--Grid row-->
-  </div>
-  <!-- Grid container -->
-    <div class="modal fade" id="share-modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form id="share-action" method="POST" action="">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="message" style="display:none">{{__('messages.Type your feeling')}}</label>
-                            <textarea class="form-control" name="commentShare" id="commentShare" rows="3" placeholder="{{__('messages.replay hint')}}"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" style="margin:0px auto; width:150px" class="btn btn-primary">{{__('messages.save and share')}}</button>
-                    </div>
-                </form>
+        <!-- Grid container -->
+        <div class="container p-4" >
+            <!--Grid row-->
+            <div class="row">
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <p>{{__('messages.footer head 1')}}</p>
+                <p style="font-weight: 200;">{{__('messages.footer body 1')}}</p>
             </div>
-        </div>
-    </div>
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <p>{{__('messages.footer head 2')}}</p>
+                <p style="font-weight: 200;">{{__('messages.footer body 2')}}</p>
+            </div>
 
-    <div class="modal fade" id="date-modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form id="specificDate" method="POST" action="">
-                    @csrf
-                    <div class="modal-body">
-                        <label for="date" class="col-sm-6 col-form-label" style="width: fit-content;margin-top: 22px;display: block;">{{__('messages.Choose Date')}}</label>
-                        <div class="col-sm-9">
-                            <div class="input-group date" id="dateSPP">
-                                <input type="text" class="form-control" id="dateD">
-                                <span class="input-group-append">
-                                    <span class="input-group-text bg-white d-block">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
-                                </span>
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <p >{{__('messages.footer head 3')}}</p>
+                <p style="font-weight: 200;">{{__('messages.footer body 3')}}</p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <p>{{__('messages.footer head 4')}}</p>
+                <p style="font-weight: 200;">{{__('messages.footer body 4')}}</p>
+            </div>
+            <!--Grid column-->
+            </div>
+            <!--Grid row-->
+        </div>
+        <!-- Grid container -->
+            <div class="modal fade" id="share-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form id="share-action" method="POST" action="">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="message" style="display:none">{{__('messages.Type your feeling')}}</label>
+                                    <textarea class="form-control" name="commentShare" id="commentShare" rows="3" placeholder="{{__('messages.replay hint')}}"></textarea>
+                                </div>
                             </div>
-                        </div>
+                            <div class="modal-footer">
+                                <button type="submit" style="margin:0px auto; width:150px" class="btn btn-primary">{{__('messages.save and share')}}</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" style="margin: 0px auto;" class="btn btn-primary">{{__('messages.Submit')}}</button>
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
-  <!-- Copyright -->
-  
-  <!-- Copyright -->
-</footer>
+
+            <div class="modal fade" id="date-modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form id="specificDate" method="POST" action="">
+                            @csrf
+                            <div class="modal-body">
+                                <label for="date" class="col-sm-6 col-form-label" style="width: fit-content;margin-top: 22px;display: block;">{{__('messages.Choose Date')}}</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group date" id="dateSPP">
+                                        <input type="text" class="form-control" id="dateD">
+                                        <span class="input-group-append">
+                                            <span class="input-group-text bg-white d-block">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" style="margin: 0px auto;" class="btn btn-primary">{{__('messages.Submit')}}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <!-- Copyright -->
+        
+        <!-- Copyright -->
+    </footer>
     <!-- Footer -->
-<footer class="page-footer font-small blue" style="background: #bf1b2c;color: white;">
+    <footer class="page-footer font-small blue" style="background: #bf1b2c;color: white;">
 
-  <!-- Footer Links -->
-  <div class="container-fluid text-center text-md-left">
+    <!-- Footer Links -->
+    <div class="container-fluid text-center text-md-left">
 
-    <!-- Grid row -->
-    <div class="row">
+        <!-- Grid row -->
+        <div class="row">
 
-      <!-- Grid column -->
-      <div class="col-md-6 mt-md-0 mb-3" style="display:none">
+        <!-- Grid column -->
+        <div class="col-md-6 mt-md-0 mb-3" style="display:none">
 
-        <!-- Content -->
-        <h5>FeelingSupport</h5>
-        <p style="text-align: initial;">Feeling support is a website to write your notes on and share it in other social media to get support.</p>
+            <!-- Content -->
+            <h5>FeelingSupport</h5>
+            <p style="text-align: initial;">Feeling support is a website to write your notes on and share it in other social media to get support.</p>
 
-      </div>
-      <!-- Grid column -->
+        </div>
+        <!-- Grid column -->
 
-      <!-- Grid column -->
-      <div class="col-md-3 mb-md-0 mb-3" style="display:none">
+        <!-- Grid column -->
+        <div class="col-md-3 mb-md-0 mb-3" style="display:none">
 
-        <!-- Links -->
-        <h5>Social Links</h5>
+            <!-- Links -->
+            <h5>Social Links</h5>
 
-        <ul class="list-unstyled" style="display: inline-flex;margin: 0px auto;">
-          <li>
-            <a class="fb-ic">
-                <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x" style="color: #4267B2;"> </i>
+            <ul class="list-unstyled" style="display: inline-flex;margin: 0px auto;">
+            <li>
+                <a class="fb-ic">
+                    <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x" style="color: #4267B2;"> </i>
+                </a>
+            </li>
+            <li>
+                <a class="tw-ic">
+                    <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x" style="color: #1DA1F2;"> </i>
+                </a>
+            </li>
+            <li>
+                <a class="ins-ic">
+                <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x" style="color: #C13584"> </i>
             </a>
-          </li>
-          <li>
-            <a class="tw-ic">
-                <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x" style="color: #1DA1F2;"> </i>
-            </a>
-          </li>
-          <li>
-            <a class="ins-ic">
-            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x" style="color: #C13584"> </i>
-          </a>
-          </li>
-        </ul>
+            </li>
+            </ul>
 
-      </div>
-      <!-- Grid column -->
+        </div>
+        <!-- Grid column -->
 
-      <!-- Grid column -->
-      <div class="col-12 mb-md-0">
+        <!-- Grid column -->
+        <div class="col-12 mb-md-0">
 
-        <ul class="list-unstyled" style="padding:0px;display: flex;margin: 12px auto;width: fit-content;font-size:14px;color:white;">
-          <li style="margin: 0px 3px;">
-            <a href="{{route('terms')}}" style="color: #fff;font-size: 11px;">{{__('messages.terms and condition')}}</a>
-          </li>
-          <li style="margin: 0px 10px;">
-            <a href="{{route('privacy')}}" style="color: #fff;font-size: 11px;">{{__('messages.privacy policy')}}</a>
-          </li>
-          <li style="margin: 0px 3px;">
-            <a href="{{route('about.us')}}" style="color: #fff;font-size: 11px;">{{__('messages.About us')}}</a>
-          </li>
-        </ul>
+            <ul class="list-unstyled" style="padding:0px;display: flex;margin: 12px auto;width: fit-content;font-size:14px;color:white;">
+            <li style="margin: 0px 3px;">
+                <a href="{{route('terms')}}" style="color: #fff;font-size: 11px;">{{__('messages.terms and condition')}}</a>
+            </li>
+            <li style="margin: 0px 10px;">
+                <a href="{{route('privacy')}}" style="color: #fff;font-size: 11px;">{{__('messages.privacy policy')}}</a>
+            </li>
+            <li style="margin: 0px 3px;">
+                <a href="{{route('about.us')}}" style="color: #fff;font-size: 11px;">{{__('messages.About us')}}</a>
+            </li>
+            </ul>
 
-      </div>
-      <!-- Grid column -->
+        </div>
+        <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
 
     </div>
-    <!-- Grid row -->
+    <!-- Footer Links -->
 
-  </div>
-  <!-- Footer Links -->
+    <!-- Copyright -->
+    <div class="footer-copyright text-center" style="background-color: #dee1e6;padding: 2px;color: black;">
+        {!!__('messages.Copyright © 2022 :')!!}
+        
+    </div>
+    <!-- Copyright -->
 
-  <!-- Copyright -->
-  <div class="footer-copyright text-center" style="background-color: #dee1e6;padding: 2px;color: black;">
-    {!!__('messages.Copyright © 2022 :')!!}
-    
-  </div>
-  <!-- Copyright -->
-
-</footer>
-<!-- Footer -->
+    </footer>
+    <!-- Footer -->
       
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
