@@ -1,8 +1,17 @@
 {
-    "Reset Password": "تحديث كلمة المرور",
-    "Email Address": "البريد الالكتروني",
-    "Send Password Reset Link": "Send Password Reset Link",
-    "Confirm Password": "تاكيد كلمة المرور",
-    "Password": "كلمة المرور",
-    "Please confirm your password before continuing.": "Please confirm your password before continuing."
+    "Reset Password": "إعادة تعيين كلمة المرور",
+    "A fresh verification link has been sent to your email address.": "تم إرسال رابط تحقق جديد إلى عنوان بريدك الإلكتروني.",
+    "Before proceeding, please check your email for a verification link.": "قبل المتابعة ، يرجى التحقق من بريدك الإلكتروني للحصول على رابط التحقق.",
+    "Confirm Password": "تأكيد كلمة المرور",
+    "Email Address": "عنوان البريد الإلكتروني",
+    "Forgot Your Password?": "هل نسيت كلمة المرور؟",
+    "If you did not receive the email": "إذا لم تستلم البريد الإلكتروني",
+    "Login": "تسجيل الدخول",
+    "Password": "كلمة السر",
+    "Please confirm your password before continuing.": "الرجاء تأكيد كلمة المرور الخاصة بك قبل المتابعة.",
+    "Register": "انشاء حساب",
+    "Send Password Reset Link": "إرسال رابط إعادة تعيين كلمة المرور",
+    "Verify Your Email Address": "تحقق من عنوان بريدك الإلكتروني",
+    "click here to request another": "انقر هنا لطلب آخر",
+    "Toggle navigation": "تغيير التنقل"
 }
