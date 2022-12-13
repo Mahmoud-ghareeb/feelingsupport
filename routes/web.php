@@ -9,7 +9,9 @@ use App\Http\Controllers\Front\ProfileController;
 use App\Http\Controllers\Front\SocialLoginController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -50,7 +52,7 @@ Route::group(
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'prevent-back-history' ]
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){
 
         Auth::routes();
@@ -140,3 +142,5 @@ Route::group(['middleware' => 'prevent-back-history' ], function(){
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
 });
+
+

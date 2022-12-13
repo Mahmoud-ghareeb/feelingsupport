@@ -795,6 +795,62 @@ class ApiController extends Controller
         return $this->returnData('comments', $comments, 'comments retreived successfully');
     }
 
+    public function showCommentsAsc($id)
+    {
+        if(auth()->check()){
+            $user_id = Auth::id();
+        }else{
+            $user_id = 123456487845435;
+        }
+        $feel = Feeling::with('emojis', 'user') 
+                        ->with(['likes' => function($q) use ($user_id){
+                            return $q->where('user_id', $user_id);
+                        }])
+                        ->withCount('comments', 'likes')
+                        ->findOrFail($id);
+        if(Auth::check())
+        {
+            $this->authorize('show', $feel);
+        } else {
+            if($feel->type == 0) abort(403);
+        }
+        
+        if(Auth::check())
+        {
+            if($feel->user_id == Auth::id()){
+            
+               $comments = Comment::with('children')
+                                ->with('user')
+                                ->where('feeling_id', $feel->id)
+                                ->whereRaw('parent_id IS NULL')
+                                ->orderby('created_at', 'asc')
+                                ->get(); 
+            }else{
+                $comments = Comment::with('children')
+                                    ->with('user')
+                                    ->where('feeling_id', $feel->id)
+                                    ->whereRaw('parent_id IS NULL')
+                                    ->where(function($q){
+                                        return $q ->where('type', '1')
+                                                  ->orWhere('user_id', Auth::id());
+                                    })
+                                    ->orderby('created_at', 'asc')
+                                    ->get();
+            }
+        }else{
+            $comments = Comment::with('children')
+                                    ->with('user')
+                                    ->where('feeling_id', $feel->id)
+                                    ->whereRaw('parent_id IS NULL')
+                                    ->where('type', '1')
+                                    ->orderby('created_at', 'asc')
+                                    ->get();
+        }
+            
+        
+        return $this->returnData('comments', $comments, 'comments retreived successfully in asc order');
+    }
+
     public function storeComment(CommentRequest $request,$feel_id)
     {
         $feeling = Feeling::findOrFail($feel_id);

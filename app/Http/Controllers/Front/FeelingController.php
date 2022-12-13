@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Jorenvh\Share\ShareFacade;
 use App\Traits\Notifiable;
+use Illuminate\Support\Facades\Session;
 use JamesMills\LaravelTimezone\Facades\Timezone;
 
 class FeelingController extends Controller
@@ -404,6 +405,7 @@ class FeelingController extends Controller
         $this->authorize('makePrivate', $feel);
         $feel->type = 0;
         $feel->save();
+        
         return redirect()->to(route('feeling.show', [$feel->user->name, $feel->id]))->with('success', __('messages.Your Note Has Been Made Private'));
     }
 

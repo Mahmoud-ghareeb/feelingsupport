@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Schema;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
  ?>
+ 
 <div class="row">
     <div class="col-md-12 dish-menu">
     <div class="nav nav-pills justify-content-center ftco-animate" id="v-pills-tab" role="tablist" aria-orientation="vertical">

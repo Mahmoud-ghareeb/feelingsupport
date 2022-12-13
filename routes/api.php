@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::group(["prefix" => '{feel_id}/comments'], function($feel_id){ 
         Route::get('/', [ApiController::class, 'showComments']);
+        Route::get('/asc', [ApiController::class, 'showCommentsAsc']);
         Route::post('store-comment', [ApiController::class, 'storeComment']);
         Route::post('{comment_id}/reply', [ApiController::class, 'replay']);
         Route::post('delete/{comment_id}', [ApiController::class, 'deleteComment']);
