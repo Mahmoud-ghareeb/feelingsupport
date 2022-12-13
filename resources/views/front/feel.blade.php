@@ -67,7 +67,7 @@
                         @endif
                         @foreach($feel->emojis as $emoji)
                             <div class="emmo-group" style="width: fit-content;">
-                                <i class="fa-solid {{$emoji->css_class}} emmo-size" data-id="3" style="color: <?php echo $emoji->color ?>;font-size:50px;"></i>   
+                                <i class="fa-solid {{$emoji->css_class}} emmo-size" data-id="3" style="color: <?php echo $emoji->color ?>;font-size:50px;padding: 2px;"></i>   
                                 <p class="emmo-text" style="color: <?php echo $emoji->color; ?>; font-size: medium !important; margin-top: 7px;">
                                 <?php 
                                     $la = app()->getLocale();
