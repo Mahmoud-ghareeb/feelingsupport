@@ -61,6 +61,8 @@ Route::group(
         Route::get('/home', [HomeController::class, 'index'])->name('home');
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
+        Route::get('/search-emojis', [FeelingController::class, 'searchEmojis'])->name('search.emojis');
+
         Route::group(['prefix' => 'update', 'as' => 'update.'], function(){
 
             Route::post('email', [ProfileController::class, 'updateEmail'])->name('email');

@@ -1,6 +1,7 @@
 <?php
 
-return array (
+return array ( 
+  'Search in emojis' => 'Search in emojis',
   'Or sign in with' => 'Or sign in with',
   'how do you feel?' => 'how do you feel?',
   'Type your feeling' => 'Write something about it (optional)...',

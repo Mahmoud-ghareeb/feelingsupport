@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FeelingRequest;
 use App\Models\Comment;
+use App\Models\Emoji;
 use App\Models\Feeling;
 use App\Models\Like;
 use App\Models\Notification;
@@ -405,7 +406,7 @@ class FeelingController extends Controller
         $this->authorize('makePrivate', $feel);
         $feel->type = 0;
         $feel->save();
-        
+
         return redirect()->to(route('feeling.show', [$feel->user->name, $feel->id]))->with('success', __('messages.Your Note Has Been Made Private'));
     }
 
@@ -752,6 +753,22 @@ class FeelingController extends Controller
         });
         
         return redirect()->back();
+    }
+
+    public function searchEmojis(Request $request)
+    {
+        $request->validate([
+            's' => 'string|nullable'
+        ]);
+        if(empty($request->s)) {
+            $lang = app()->getLocale();
+            $data = Emoji::all();
+        }else {
+            $lang = app()->getLocale();
+            $data = Emoji::where('type_' . $lang, 'LIKE', "%$request->s%")->get();
+        }
+
+        return $data;
     }
     
 }
