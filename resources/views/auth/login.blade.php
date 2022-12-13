@@ -85,11 +85,12 @@
                                 font-size: 34px;
                                 color: #1877F2;
                                 margin-right: 15px;
+                                margin-left: 15px;
                             "></i>
                                 <!-- <img width="197" height="42" style="border: 1px solid #4e6fa5;border-radius: 21px;" src="{{ asset('assets/images/fb_login.jpg') }}" alt="facebook login"> -->
                             </a>
                             <a href="{{ route('google.login') }}" style="margin: 0px auto;padding-bottom: 10px;    display: block;">
-                                <img style="margin-left: 15px;padding: 5px;border-radius: 21px;width: 36px;box-shadow: 1px 1px 5px #ded8d8;" src="{{ asset('assets/images/g_logo.png') }}" alt="google login">
+                                <img style="margin-left: 15px;margin-right: 15px;padding: 5px;border-radius: 21px;width: 36px;box-shadow: 1px 1px 5px #ded8d8;" src="{{ asset('assets/images/g_logo.png') }}" alt="google login">
                             </a>
                         </div>
 
