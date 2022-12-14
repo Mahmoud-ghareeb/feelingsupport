@@ -360,7 +360,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                             html += `
                             
                                 <div class="emmo-group clearfix">
-                                    <i class="fa-regular ${x['css_class']} emmo-size emmo-select" data-id="${x['id']}" style="-webkit-text-stroke: 0.5px white; font-size: 38px; color: ${x['color']}"></i>   
+                                    <i class="fa-regular ${x['css_class']} emmo-size emmo-chart" data-id="${x['id']}" style="-webkit-text-stroke: 0.5px white; font-size: 38px; color: ${x['color']}"></i>   
                                     <p class="emmo-text" style="color: ${x['color']}; margin-top: 7px;">
                                     ${x['type_<?php echo app()->getLocale(); ?>']}
                                     </p>
