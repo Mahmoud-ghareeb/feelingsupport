@@ -369,6 +369,26 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                             `;
                         }
                         $("#put-search-data").html(html);
+
+                        $(".emmo-chart").on('click', function() {
+                            $(".emmo-chart").removeClass('fa-solid');
+                            $(".emmo-chart").addClass('fa-regular');
+                            $(this).addClass('fa-solid');
+                            $(this).removeClass('fa-regular');
+                            var ids = "";
+                            ids = $(this).attr('data-id');
+                            $("#feel_id").val(ids);
+                            var datestart = $("#dateChartstart").val();
+                            var dateend   = $("#dateChartend").val();
+                            var whichEmmo = $("#feel_id").val();
+                            $("#first_span").html(datestart);
+                            $("#second_span").html(dateend);
+                            
+                            
+                            chart.update({
+                                url: "@chart('emoji_chart')?startdate=" + datestart + "&enddate=" + dateend + "&emoji_id=" + whichEmmo + "&lang=<?php echo app()->getLocale() ?>",
+                                });
+                        });
                     },
                     error: function(err){
                         console.log(err);
