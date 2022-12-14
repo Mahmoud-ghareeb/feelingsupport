@@ -57,14 +57,14 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                                 <a id="emojii" style="color: black; font-size: 19px;padding-left: 0px;<?php if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl'){ ?> padding-right: 10px; <?php }else{ ?> padding-right: 0px; <?php } ?>" class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><i class="fa-solid fa-caret-down"></i></a>
                                 <ul class="dropdown-menu top-dropdown lg-dropdown notification-dropdown" @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl') style="width: 335px;position: absolute;left: -66px;" @else style="width: 335px;position: absolute;left: -240px;" @endif aria-labelledby="emojii" id="xemoji">
                                     <li>             
-                                        <div style="width: 100%;margin-bottom: 13px;display:none;">
+                                        <div style="width: 100%;margin-bottom: 13px;">
                                             <input type="text" class="form-control" id="search-emojis" placeholder="{{__('messages.Search in emojis')}}">
                                         </div>                    
                                         <div class="scrollDiv" style="height: 250px;overflow-y: auto;">
                                             <div class="notification-list d-emoji" id="put-search-data">
                                                 @foreach($emojis as $key => $emoji)
                                                     @if($key > 3)
-                                                        <div class="emmo-group clearfix">
+                                                        <div class="emmo-group clearfix emmo-search">
                                                             <i class="fa-regular {{$emoji->css_class}} emmo-size emmo-chart" data-id="{{$emoji->id}}" style="-webkit-text-stroke: 0.5px white;color: <?php echo $emoji->color ?>"></i>   
                                                             <p class="emmo-text" style="color: <?php echo $emoji->color; ?>; margin-top: 7px;">
                                                             <?php 
@@ -345,63 +345,22 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
             });
             $("#search-emojis").on('keyup', () => {
 
-                let query = $("#search-emojis").val();
-                $.ajax({
-                    type:"GET",
-                    url:'/search-emojis',
-                    data:{
-                        "_token": "{{ csrf_token() }}",
-                        "s": query
-                    },
-                    success: function(data){
-                        let html = '';
-                        for (const x of data) {
-                            console.log(x);
-                            html += `
-                            
-                                <div class="emmo-group clearfix">
-                                    <i class="fa-regular ${x['css_class']} emmo-size emmo-chart" data-id="${x['id']}" style="-webkit-text-stroke: 0.5px white; font-size: 38px; color: ${x['color']}"></i>   
-                                    <p class="emmo-text" style="color: ${x['color']}; margin-top: 7px;">
-                                    ${x['type_<?php echo app()->getLocale(); ?>']}
-                                    </p>
-                                </div>
-                            
-                            `;
-                        }
-                        $("#put-search-data").html(html);
-
-                        var datestart = $("#dateChartstart").val();
-                        var dateend   = $("#dateChartend").val();
-                        var whichEmmo = $("#feel_id").val();
-
-                    
-
-                        $(".emmo-chart").on('click', function() {
-                            $(".emmo-chart").removeClass('fa-solid');
-                            $(".emmo-chart").addClass('fa-regular');
-                            $(this).addClass('fa-solid');
-                            $(this).removeClass('fa-regular');
-                            var ids = "";
-                            ids = $(this).attr('data-id');
-                            $("#feel_id").val(ids);
-                            var datestart = $("#dateChartstart").val();
-                            var dateend   = $("#dateChartend").val();
-                            var whichEmmo = $("#feel_id").val();
-                            $("#first_span").html(datestart);
-                            $("#second_span").html(dateend);
-                            
-                            
-                            chart.update({
-                                url: "@chart('emoji_chart')?startdate=" + datestart + "&enddate=" + dateend + "&emoji_id=" + whichEmmo + "&lang=<?php echo app()->getLocale() ?>",
-                                });
-                        });
-                    },
-                    error: function(err){
-                        console.log(err);
+                var filter = document.getElementById("search-emojis"), // search box
+                list = document.querySelectorAll(".emmo-search"); // all list items
+            
+                // (B) ATTACH KEY UP LISTENER TO SEARCH BOX
+                filter.onkeyup = () => {
+                    // (B1) GET CURRENT SEARCH TERM
+                    let search = filter.value.toLowerCase();
+                
+                    // (B2) LOOP THROUGH LIST ITEMS - ONLY SHOW THOSE THAT MATCH SEARCH
+                    for (let i of list) {
+                    let item = i.innerHTML.toLowerCase();
+                    if (item.indexOf(search) == -1) { i.classList.add("d-none"); }
+                    else { i.classList.remove("d-none"); }
                     }
-                });
-
-                });
+                };
             });
+        });
     </script>
 @endsection
