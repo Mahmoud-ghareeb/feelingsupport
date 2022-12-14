@@ -152,12 +152,12 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                         
                         `;
                     }
-
+                    
                     $("#put-search-data").html(html);
                     $(".emmo-select").on('click', function() {
                         $(this).toggleClass('fa-solid');
                         $(this).toggleClass('fa-regular');
-                        var ids = $("#feel_id").val();
+                        var ids = "";
                         $(".emmo-select").each(function() {
                             var clas = $(this).attr('class');
                             var dataid = $(this).attr('data-id');
