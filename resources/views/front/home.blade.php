@@ -57,7 +57,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                                             <div class="notification-list d-emoji" id="put-search-data">
                                                 @foreach($emojis as $key => $emoji)
                                                     @if($key > 3)
-                                                        <div class="emmo-group clearfix">
+                                                        <div class="emmo-group clearfix emmo-search">
                                                             <i class="fa-regular {{$emoji->css_class}} emmo-size emmo-select" data-id="{{$emoji->id}}" style="-webkit-text-stroke: 0.5px white; font-size: 38px; color: <?php echo $emoji->color ?>"></i>   
                                                             <p class="emmo-text" style="color: <?php echo $emoji->color; ?>; margin-top: 7px;">
                                                             <?php 
@@ -117,6 +117,8 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
     
 </script>
 @enderror
+<script src="https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-umd-min.js
+"></script>
 <script>
     $(".lhome").css('color', '#bf1b2c');
     $(".lnotes").css('color', 'black');
@@ -130,49 +132,77 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
         $("#search-emojis").on('keyup', () => {
 
             let query = $("#search-emojis").val();
-            $.ajax({
-                type:"GET",
-                url:'/search-emojis',
-                data:{
-                    "_token": "{{ csrf_token() }}",
-                    "s": query
-                },
-                success: function(data){
-                    let html = '';
-                    for (const x of data) {
-                        console.log(x);
-                        html += `
+            // $.ajax({
+            //     type:"GET",
+            //     url:'/search-emojis',
+            //     data:{
+            //         "_token": "{{ csrf_token() }}",
+            //         "s": query
+            //     },
+            //     success: function(data){
+            //         let html = '';
+            //         for (const x of data) {
+            //             console.log(x);
+            //             html += `
                         
-                            <div class="emmo-group clearfix">
-                                <i class="fa-regular ${x['css_class']} emmo-size emmo-select" data-id="${x['id']}" style="-webkit-text-stroke: 0.5px white; font-size: 38px; color: ${x['color']}"></i>   
-                                <p class="emmo-text" style="color: ${x['color']}; margin-top: 7px;">
-                                ${x['type_<?php echo app()->getLocale(); ?>']}
-                                </p>
-                            </div>
+            //                 <div class="emmo-group clearfix">
+            //                     <i class="fa-regular ${x['css_class']} emmo-size emmo-select" data-id="${x['id']}" style="-webkit-text-stroke: 0.5px white; font-size: 38px; color: ${x['color']}"></i>   
+            //                     <p class="emmo-text" style="color: ${x['color']}; margin-top: 7px;">
+            //                     ${x['type_<?php echo app()->getLocale(); ?>']}
+            //                     </p>
+            //                 </div>
                         
-                        `;
-                    }
+            //             `;
+            //         }
                     
-                    $("#put-search-data").html(html);
-                    $(".emmo-select").on('click', function() {
-                        $(this).toggleClass('fa-solid');
-                        $(this).toggleClass('fa-regular');
-                        var ids = "";
-                        $(".emmo-select").each(function() {
-                            var clas = $(this).attr('class');
-                            var dataid = $(this).attr('data-id');
-                            if(clas.indexOf('-solid') != -1){
-                                ids += (dataid + ",");
-                            }
-                        });
-                        ids = ids.slice(0,-1);
-                        $("#feel_id").val(ids);
-                    });
-                },
-                error: function(err){
-                    console.log(err);
+            //         $("#put-search-data").html(html);
+            //         $(".emmo-select").on('click', function() {
+            //             $(this).toggleClass('fa-solid');
+            //             $(this).toggleClass('fa-regular');
+            //             var ids = "";
+            //             $(".emmo-select").each(function() {
+            //                 var clas = $(this).attr('class');
+            //                 var dataid = $(this).attr('data-id');
+            //                 if(clas.indexOf('-solid') != -1){
+            //                     ids += (dataid + ",");
+            //                 }
+            //             });
+            //             ids = ids.slice(0,-1);
+            //             $("#feel_id").val(ids);
+            //         });
+            //     },
+            //     error: function(err){
+            //         console.log(err);
+            //     }
+            // });
+
+            // function getMatchingIndex(yourArray, searchTerm) {
+            //     return _.findIndex(yourArray, function(obj) {
+            //         return _.contains(obj, searchTerm);
+            //     });
+            // }
+
+            // var texts= $(".emmo-text").each(function() {
+            //                 return $(this).text().trim();
+            //             }).get();
+
+            // console.log(getMatchingIndex(texts, query));
+
+            var filter = document.getElementById("search-emojis"), // search box
+            list = document.querySelectorAll(".emmo-search"); // all list items
+        
+            // (B) ATTACH KEY UP LISTENER TO SEARCH BOX
+            filter.onkeyup = () => {
+                // (B1) GET CURRENT SEARCH TERM
+                let search = filter.value.toLowerCase();
+            
+                // (B2) LOOP THROUGH LIST ITEMS - ONLY SHOW THOSE THAT MATCH SEARCH
+                for (let i of list) {
+                let item = i.innerHTML.toLowerCase();
+                if (item.indexOf(search) == -1) { i.classList.add("d-none"); }
+                else { i.classList.remove("d-none"); }
                 }
-            });
+            };
 
         });
 
