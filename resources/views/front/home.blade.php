@@ -152,7 +152,22 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                         
                         `;
                     }
+                    
                     $("#put-search-data").html(html);
+                    $(".emmo-select").on('click', function() {
+                        $(this).toggleClass('fa-solid');
+                        $(this).toggleClass('fa-regular');
+                        var ids = "";
+                        $(".emmo-select").each(function() {
+                            var clas = $(this).attr('class');
+                            var dataid = $(this).attr('data-id');
+                            if(clas.indexOf('-solid') != -1){
+                                ids += (dataid + ",");
+                            }
+                        });
+                        ids = ids.slice(0,-1);
+                        $("#feel_id").val(ids);
+                    });
                 },
                 error: function(err){
                     console.log(err);
