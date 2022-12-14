@@ -370,6 +370,10 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                         }
                         $("#put-search-data").html(html);
 
+                        var datestart = $("#dateChartstart").val();
+                        var dateend   = $("#dateChartend").val();
+                        var whichEmmo = $("#feel_id").val();
+
                         const chart = new Chartisan({
                 el: '#chart',
                 url: "@chart('emoji_chart')?startdate=" + datestart + "&enddate=" + dateend + "&emoji_id=" + whichEmmo + "&lang=<?php echo app()->getLocale() ?>",
