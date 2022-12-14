@@ -374,68 +374,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                         var dateend   = $("#dateChartend").val();
                         var whichEmmo = $("#feel_id").val();
 
-                        // const chart = new Chartisan({
-                        //     el: '#chart',
-                        //     url: "@chart('emoji_chart')?startdate=" + datestart + "&enddate=" + dateend + "&emoji_id=" + whichEmmo + "&lang=<?php echo app()->getLocale() ?>",
-                        //     hooks: new ChartisanHooks()
-                        //         .datasets('bar')
-                        //         .tooltip(true)
-                        //         .colors(['#15bda6', '#15e115', '#07b0f1', 'orange', 'red'])
-                        //         .custom(({ data, merge, server }) => {
-                        //             console.log(server);
-                        //             $("#tot").html(server.chart.extra['total']);
-                        //             var html = "";
-                        //             var good = 0;
-                        //             var bad  = 0;
-                        //             for (const x of server.chart.extra.data) {
-                        //                 console.log(x);
-                        //                 var percent = isNaN(Math.round((x['count'] / server.chart.extra['total']) * 100)) ? '0' : Math.round((x['count'] / server.chart.extra['total']) * 100);
-                        //                 if(x['category'] == "positive"){
-                        //                     good += x['count'];
-                        //                 }else{
-                        //                     bad += x['count'];
-                        //                 }
-                        //                 <?php 
-                        //                     $la = app()->getLocale();
-                        //                     $type = "type_" . $la;
-                        //                 ?>
-                        //                 var typpe = "";
-                        //                 if("<?php echo $type ?>" in x){
-                        //                     typpe = "<?php echo $type ?>";
-                        //                     if(!x[typpe])
-                        //                         typpe = "type_en"
-                        //                 }else{
-                        //                     typpe = "type_en";
-                        //                 }
-                        //                 html += `<div class="emmo-group" style="width: auto;">
-                        //                             <div style="position:relative">
-                        //                                 <i class="fa-solid ${x['class']} emmo-size emmo-select" style="-webkit-text-stroke: 0.5px white;font-size: 50px;color: ${x['color']}"></i>
-                        //                                 <p class="emmo-text" style="color: ${x['color']}; margin-top: -7px;"><?php 
-                        //                                     if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
-                        //                                     { ?>
-                        //                                         %${x[typpe]} ${percent}
-                        //                                     <?php }else{ ?>
-                        //                                         ${x[typpe]} ${percent}%
-                        //                                     <?php }  ?>
-                        //                                 </p>
-                        //                                 <div class="progress emmo-progress" style="border-radius: unset;">
-                        //                                     <div class="progress-bar" style="background: ${x['color']}; width: ${percent}%" role="progressbar" aria-valuenow="${x['count']}" aria-valuemin="0" aria-valuemax="${server.chart.extra['total']}"></div>
-                        //                                 </div>
-                        //                                 <div class="emmo-count" style="color: ${x['color']}">
-                        //                                     ${x['count']}
-                        //                                 </div>
-                        //                             </div>
-                        //                         </div>`;
-                        //                         $("#emoji_name").html(x[typpe]);
-                        //             };
-                        //             var gene = (good >= bad ? 'good' : 'bad'); 
-                        //             $("#gen").html(gene);
-                        //             $("#emoji_statistic").html(html);
-                                    
-                        //         return data;
-                        //         }),
-                            
-                        // });
+                    
 
                         $(".emmo-chart").on('click', function() {
                             $(".emmo-chart").removeClass('fa-solid');
