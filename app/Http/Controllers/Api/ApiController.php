@@ -792,7 +792,7 @@ class ApiController extends Controller
         }
             
         
-        return $this->returnData('comments', $comments, 'comments retreived successfully');
+        return $this->returnData('comments', $feel + $comments, 'comments retreived successfully');
     }
 
     public function showCommentsAsc($id)
