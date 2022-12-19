@@ -793,9 +793,10 @@ class ApiController extends Controller
         
        $data = new \Illuminate\Database\Eloquent\Collection;
        $data['feel'] = $feel;
+       $data['comments'] = $comments;
         //$comments = $feel->merge(['comments' => $comments]);
         
-        return $this->returnData('comments', $data, 'comments retreived successfully');
+        return $this->returnData('data', $data, 'feel and comments retreived successfully');
     }
 
     public function showCommentsAsc($id)
