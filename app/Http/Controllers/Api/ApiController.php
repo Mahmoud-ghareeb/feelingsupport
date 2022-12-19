@@ -792,7 +792,7 @@ class ApiController extends Controller
         }
         
        $data = new \Illuminate\Database\Eloquent\Collection;
-       $data->merge($feel)->merge($comments);
+       $data['feel'] = $feel;
         //$comments = $feel->merge(['comments' => $comments]);
         
         return $this->returnData('comments', $data, 'comments retreived successfully');
