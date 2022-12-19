@@ -795,7 +795,7 @@ class ApiController extends Controller
        $data->merge($feel)->merge($comments);
         //$comments = $feel->merge(['comments' => $comments]);
         
-        return $this->returnData('comments', $comments, 'comments retreived successfully');
+        return $this->returnData('comments', $feel, 'comments retreived successfully');
     }
 
     public function showCommentsAsc($id)
