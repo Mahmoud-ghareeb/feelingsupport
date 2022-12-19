@@ -850,9 +850,12 @@ class ApiController extends Controller
                                     ->orderby('created_at', 'asc')
                                     ->get();
         }
-            
         
-        return $this->returnData('comments', $comments, 'comments retreived successfully in asc order');
+        $data = new \Illuminate\Database\Eloquent\Collection;
+        $data['feel'] = $feel;
+        $data['comments'] = $comments;
+        
+        return $this->returnData('data', $data, 'feel and comments retreived successfully in asc order');
     }
 
     public function storeComment(CommentRequest $request,$feel_id)
