@@ -791,10 +791,11 @@ class ApiController extends Controller
                                     ->get();
         }
         
-       // $data = collect();
-        $feel = $feel->merge(['comments' => $comments]);
+       $data = collect();
+       $data->merge($feel)->merge($comments);
+        //$comments = $feel->merge(['comments' => $comments]);
         
-        return $this->returnData('comments', $feel, 'comments retreived successfully');
+        return $this->returnData('comments', $data, 'comments retreived successfully');
     }
 
     public function showCommentsAsc($id)
