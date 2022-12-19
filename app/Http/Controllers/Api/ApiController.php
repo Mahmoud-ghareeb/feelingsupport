@@ -790,9 +790,11 @@ class ApiController extends Controller
                                     ->orderby('created_at', 'desc')
                                     ->get();
         }
-            
         
-        return $this->returnData('comments', $feel + $comments, 'comments retreived successfully');
+       // $data = collect();
+        $feel = $feel->merge(['comments' => $comments]);
+        
+        return $this->returnData('comments', $feel, 'comments retreived successfully');
     }
 
     public function showCommentsAsc($id)
