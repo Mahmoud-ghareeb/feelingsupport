@@ -84,7 +84,10 @@
                         <div class="form-group" style="margin-top: 20px;display: flex;">
                             <a href="javascript:void(0);" style="display:block;width:fit-content; height:30px;font-size: 15px;font-size: 13px;" onclick="document.getElementById('image').click()"><i class="fa-solid fa-image" style="margin: 0px 7px;font-size: 29px;"></i>{{__('messages.Choose an image')}}</a>
                             <input type="file" class="form-control" id="image" name="picture" placeholder="" style="display:none">
-                            <img id="images" style="max-width: 80px;margin: 0px 20px;" />
+                            <div style="position: relative;">
+                                <span id="remove-image" style="display:none;font-size: 14px;cursor: pointer;position: absolute;top: -10px;right: 12px;background: red;padding: 0px 6px 0px 6px;border-radius: 50%;">X</span>
+                                <img id="images" style="max-width: 80px;margin: 0px 20px;" />
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary center-element">{{__('messages.Update Profile Picture')}}</button>
                     </form>
@@ -105,11 +108,18 @@
     @endif
     <script>
         $(document).ready(function(){
-       document.getElementById('image').onchange = function () {
-          var src = URL.createObjectURL(this.files[0])
-          document.getElementById('images').src = src
-        } 
-    });
+            document.getElementById('image').onchange = function () {
+                var src = URL.createObjectURL(this.files[0])
+                document.getElementById('images').src = src
+                $("#remove-image").css('display', 'block');
+            }
+
+            $("#remove-image").on('click', function(){
+                document.getElementById('images').src = '';
+                $('#image').val('');
+                $("#remove-image").css('display', 'none');
+            });
+        });
     </script>
     <script>
         $(document).ready(function(){

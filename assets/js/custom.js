@@ -1,61 +1,22 @@
 $(document).ready(function(){
 
-    // function emoclick(dataid, dp) {
-    //     if(dp == 'far'){
-    //         $(".emoji" + dataid).attr('data-prefix', 'fas').ready(function(){
-    //             $(".emoji" + dataid).on('click', function(){
-    //                 var dataid = $(this).attr('data-id');
-    //                 var dp = $(this).attr('data-prefix');
-    //                 emoclick(dataid, dp)
-    //             });
-    //         });
-    //     }else{
-    //         $(".emoji" + dataid).attr('data-prefix', 'far').ready(function(){
-    //             $(".emoji" + dataid).on('click', function(){
-    //                 var dataid = $(this).attr('data-id');
-    //                 var dp = $(this).attr('data-prefix');
-    //                 emoclick(dataid, dp)
-    //             });
-    //         });
-    //     }
-    //     //$(this).toggleClass('fa-regular');
-    //     var ids = "";
-    //     $(".emmo-select").each(function() {
-    //         var clas = $(this).attr('data-prefix');
-    //         var dataid = $(this).attr('data-id');
-    //         if(clas.indexOf('fas') != -1){
-    //             ids += (dataid + ",");
-    //         }
-    //     });
-    //     ids = ids.slice(0,-1);
-    //     $("#feel_id").val(ids);
-    // }
-
-    // $(".emmo-select").on('click', function(){
-    //     var dataid = $(this).attr('data-id');
-    //     var dp = $(this).attr('data-prefix');
-    //     emoclick(dataid, dp)
-    // });
-
-    // $(".dropdown-togle").on('click', function(e) {
-    //     e.preventDefault();
-
-    //     $(".body").on('click', function(e){
-    //         $(".dropdown-menu").hide();
-    //     });
-
-    //     let id = $(this).attr('id');
-    //     $("." + id).toggle();
-
-        
-    // });
-
-
-    $(".emmo-select").on('click', function() {
-        $(this).toggleClass('fa-solid');
-        $(this).toggleClass('fa-regular');
+    let clickOnEmoji = function() {
+        let dataId = $(this).data('id');
+        $("*[data-id=" + dataId + "]").toggleClass('fa-solid');
+        $("*[data-id=" + dataId + "]").toggleClass('fa-regular');
         var ids = "";
-        $(".emmo-select").each(function() {
+        if($(this).hasClass('fa-regular')) {
+            $("#preview *[data-id=" + dataId + "]").parent().remove()
+            if($("#preview").children().length <= 1)
+                $("#preview").parent().css('display', 'none');
+
+        }else {
+            $("#preview").append('<div class="emmo-group" style="width: fit-content;">' + $(this).parent().html() + '</div>')
+                     .parent().css('display', 'flex');
+        
+        }
+        
+        $("#preview .emmo-select").each(function() {
             var clas = $(this).attr('class');
             var dataid = $(this).attr('data-id');
             if(clas.indexOf('-solid') != -1){
@@ -64,8 +25,10 @@ $(document).ready(function(){
         });
         ids = ids.slice(0,-1);
         $("#feel_id").val(ids);
-    });
+    }  
     
+    $("body").on('click', '.emmo-select', clickOnEmoji);
+    $(".emmo-select-dropdown").on('click', clickOnEmoji);
 
     $(".open-replay-modal").on('click', function(){
         $("#reply-modal").modal('show');

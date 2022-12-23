@@ -15,6 +15,11 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
             <form method="POST" action="{{ route('feeling.store') }}" enctype="multipart/form-data">
                 @csrf
                 <p class="center-element" style="margin-bottom: 15px;">{{__('messages.how do you feel?')}} <span class="hint">{{__('messages.how do you feel hint')}}</span></p>
+                <div style="min-width: 300px;overflow-x: auto;overflow-y: hidden;white-space: nowrap;margin-bottom: 18px;display: none;">
+                    <div id="preview" class="emmo-div" style="position: relative;display: flex;height: 68px;">
+                        <p style="padding-top: 10px;margin-left: 10px;margin-right: 10px;">{{__('messages.feel with')}}</p>
+                    </div>
+                </div>
                 <div class="emmo-div" style="position: relative;">
                     
                     <!-- <img src="{{ asset('assets/images/emotions/happy/amazing.svg') }}" alt=""> -->
@@ -58,7 +63,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                                                 @foreach($emojis as $key => $emoji)
                                                     @if($key > 3)
                                                         <div class="emmo-group clearfix emmo-search">
-                                                            <i class="fa-regular {{$emoji->css_class}} emmo-size emmo-select" data-id="{{$emoji->id}}" style="-webkit-text-stroke: 0.5px white; font-size: 38px; color: <?php echo $emoji->color ?>"></i>   
+                                                            <i class="fa-regular {{$emoji->css_class}} emmo-size emmo-select emmo-select-dropdown" data-id="{{$emoji->id}}" style="-webkit-text-stroke: 0.5px white; font-size: 38px; color: <?php echo $emoji->color ?>"></i>   
                                                             <p class="emmo-text" style="color: <?php echo $emoji->color; ?>; margin-top: 7px;">
                                                             <?php 
                                                                 $la = app()->getLocale();
@@ -97,7 +102,11 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                 <div class="form-group" style="margin-top: 20px;display: flex;">
                     <a href="javascript:void(0);" style="display:block;width:fit-content; height:30px;font-size: 13px;" onclick="document.getElementById('image').click()"><i class="fa-solid fa-image" style="margin: 0px 7px;font-size: 29px;"></i>{{__('messages.Choose an image')}}</a>
                     <input type="file" class="form-control" id="image" name="image" placeholder="" style="display:none">
-                    <img id="images" style="max-width: 80px;margin: 0px 20px;" />
+                    <div style="position: relative;">
+                        <span id="remove-image" style="display:none;font-size: 14px;cursor: pointer;position: absolute;top: -10px;right: 12px;background: red;padding: 0px 6px 0px 6px;border-radius: 50%;">X</span>
+                        <img id="images" style="max-width: 80px;margin: 0px 20px;" />
+                    </div>
+                    
                 </div>
                 <div class="form-group center-element">
                     <input type="submit" class="btn btn-primary" name="submitbutton" style="margin-top: 20px;width: 140px;margin-right: 10px;" value="{{__('messages.save')}}">
@@ -125,9 +134,16 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
     $(".lcharts").css('color', 'black'); 
     $(document).ready(function(){
        document.getElementById('image').onchange = function () {
-          var src = URL.createObjectURL(this.files[0])
-          document.getElementById('images').src = src
+          var src = URL.createObjectURL(this.files[0]);
+          document.getElementById('images').src = src;
+          $("#remove-image").css('display', 'block');
         }
+
+        $("#remove-image").on('click', function(){
+            document.getElementById('images').src = '';
+            $('#image').val('');
+            $("#remove-image").css('display', 'none');
+        });
 
         $("#search-emojis").on('keyup', () => {
 
