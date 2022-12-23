@@ -55,7 +55,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                                 <ul class="dropdown-menu top-dropdown lg-dropdown notification-dropdown" @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl') style="width: 335px;position: absolute;left: -66px;" @else style="width: 335px;position: absolute;left: -240px;" @endif aria-labelledby="emojii" id="xemoji">
                                     <li>   
                                         <div style="width: 100%;margin-bottom: 13px;">
-                                            <input type="text" class="form-control" id="search-emojis" placeholder="{{__('messages.Search in emojis')}}">
+                                            <input type="text" class="form-control" id="search-emojis" placeholder="&#xf002;" style="font-family: 'Font Awesome 6 Pro';">
                                         </div>                             
                                         <div class="scrollDiv" style="height: 250px;overflow-y: auto;">
                                             
