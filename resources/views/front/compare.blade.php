@@ -54,12 +54,15 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                         <li style="list-style-type: none;"></li>
                         <a id="emojii" style="color: black; font-size: 19px;padding-left: 0px;<?php if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl'){ ?> padding-right: 10px; <?php }else{ ?> padding-right: 0px; <?php } ?>" class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><i class="fa-solid fa-caret-down"></i></a>
                         <ul class="dropdown-menu top-dropdown lg-dropdown notification-dropdown" @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl') style="width: 335px;position: absolute;left: -66px;" @else style="width: 335px;position: absolute;left: -240px;" @endif aria-labelledby="emojii" id="xemoji">
-                            <li>                                
+                            <li>       
+                            <div style="width: 100%;margin-bottom: 13px;">
+                                <input type="text" class="form-control" id="search-emojis" placeholder="&#xf002;">
+                            </div>                         
                                 <div class="scrollDiv" style="height: 250px;overflow-y: auto;">
                                     <div class="notification-list d-emoji">
                                         @foreach($emojis as $key => $emoji)
                                             @if($key > 3)
-                                                <div class="emmo-group clearfix">
+                                                <div class="emmo-group clearfix emmo-search">
                                                     <i class="fa-regular {{$emoji->css_class}} emmo-size emmo-select" data-id="{{$emoji->id}}" style="-webkit-text-stroke: 0.5px white; font-size: 38px; color: <?php echo $emoji->color ?>"></i>   
                                                     <p class="emmo-text" style="color: <?php echo $emoji->color; ?>; margin-top: 7px;">
                                                     <?php 
@@ -300,6 +303,25 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
                 chart.update({
                     url: "@chart('compare_chart')?startdatestart=" + startdatestart + "&startdateend=" + startdateend + "&enddatestart=" + enddatestart + "&enddateend=" + enddateend + "&lang=<?php echo app()->getLocale() ?>" + "&ids=" + ids,
                     });
+            });
+
+            $("#search-emojis").on('keyup', () => {
+
+                var filter = document.getElementById("search-emojis"), // search box
+                list = document.querySelectorAll(".emmo-search"); // all list items
+
+                // (B) ATTACH KEY UP LISTENER TO SEARCH BOX
+                filter.onkeyup = () => {
+                    // (B1) GET CURRENT SEARCH TERM
+                    let search = filter.value.toLowerCase();
+
+                    // (B2) LOOP THROUGH LIST ITEMS - ONLY SHOW THOSE THAT MATCH SEARCH
+                    for (let i of list) {
+                    let item = i.innerHTML.toLowerCase();
+                    if (item.indexOf(search) == -1) { i.classList.add("d-none"); }
+                    else { i.classList.remove("d-none"); }
+                    }
+                };
             });
             
         });
