@@ -92,7 +92,10 @@
                                  </div>
         					</div>
                                 <div class="scrollDiv" style="height: 350px;overflow-y: auto;">
-                                    <div class="notification-list messi_notification">  
+                                    <div class="notification-list messi_notification"> 
+                                        <div class="spinner-border" role="status" style="margin: 0px auto;display: block;">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
                                     </div>
                                 </div>
                             </li>
@@ -133,8 +136,9 @@
             					</div>
                                     <div class="scrollDiv" style="height: 350px;overflow-y: auto;">
                                         <div class="notification-list messi_notification"> 
-                                            
-                                            
+                                            <div class="spinner-border" role="status" style="margin: 0px auto;display: block;">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>                                             
                                         </div>
                                     </div>
                             </div>
