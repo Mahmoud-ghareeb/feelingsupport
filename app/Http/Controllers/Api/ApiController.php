@@ -739,6 +739,14 @@ class ApiController extends Controller
         return $this->returnSuccessMessage('Profile Picture Updated Successfully', 'F000');
     }
 
+    public function readSingleNotification($noti_id)
+    {
+        $noti = Notification::findOrFail($noti_id);
+        $noti->is_viewed = 1;
+        $noti->save();
+        return $this->returnSuccessMessage('Notification read successfully', 'F000');
+    }
+
     public function showComments($id)
     {
         if(auth()->check()){

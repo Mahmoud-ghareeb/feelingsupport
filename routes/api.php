@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth:api'], function(){
         
     Route::get('notification', [ApiController::class, 'getNotifications']);
     Route::post('read-all', [ApiController::class, 'reaAllNotification']);
+    Route::post('read-notification/{$noti_id}', [ApiController::class, 'readSingleNotification']);
     Route::post('clear-all', [ApiController::class, 'clearAllNotification']);
     Route::get('notification/count', [ApiController::class, 'getNotificationsCount']);
 
@@ -75,6 +76,3 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
