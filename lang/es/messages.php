@@ -1,7 +1,7 @@
 <?php
 
 return array (
-  'Add Comment' => 'Añadir',
+  'Add Comment' => 'Añadir comentario',
   'privacy' => '<h1>Política de privacidad de feelingsupport</h1>
 
 <p>En feelingsupport, accesible desde https://feelingsupport.com/, una de nuestras principales prioridades es la privacidad de nuestros visitantes. Este documento de Política de privacidad contiene tipos de información recopilada y registrada por Feelingsupport y cómo la usamos.</p>
@@ -268,10 +268,10 @@ sigue un procedimiento estándar de uso de archivos de registro. Estos archivos 
   'To' => 'para',
   'Total Feeling' => 'Número de sentimientos',
   'Type your feeling' => 'Escribe algo al respecto (opcional)...',
-  'Update Email' => 'Actualizar',
-  'Update Info' => 'Actualizar',
-  'Update Password' => 'Cambiar',
-  'Update Profile Picture' => 'Actualizar',
+  'Update Email' => 'Actualizar correo electrónico',
+  'Update Info' => 'Actualizar información',
+  'Update Password' => 'Cambiar contraseña',
+  'Update Profile Picture' => 'Actualizar foto de perfil',
   'User Name' => 'Nombre de usuario',
   'Your Comment Has Been Deleted Successfully' => 'El comentario ha sido eliminado con éxito',
   'Your Note Has Been Deleted Successfully' => 'Tu sentimiento ha sido eliminado con éxito',
@@ -318,7 +318,7 @@ sigue un procedimiento estándar de uso de archivos de registro. Estos archivos 
   'popular' => 'populares',
   'positive' => 'Positivo',
   'postive or negative' => 'Estado',
-  'privacy policy' => 'Política de privacidad',
+  'privacy policy' => 'política de privacidad',
   'private feels' => 'Privado',
   'read all' => 'marcar como leído',
   'register replay message' => 'Responder...',
