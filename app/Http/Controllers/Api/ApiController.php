@@ -1120,10 +1120,11 @@ class ApiController extends Controller
     public function searchEmojis(Request $request)
     {
         $request->validate([
-            's' => 'string|nullable'
+            's' => 'string|nullable',
+            'lang' => 'string'
         ]);
         if(empty($request->s)) {
-            $lang = app()->getLocale();
+            $lang = $request->lang ?? 'en';
             $data = Emoji::select('id', 'css_class', 'color', 'type_' . $lang . ' as type')->orderBy('raw_order')->get();
         }else {
             $lang = app()->getLocale();
