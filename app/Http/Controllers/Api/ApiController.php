@@ -1117,4 +1117,20 @@ class ApiController extends Controller
         return $this->returnData('data', $data, 'info to construct the link of the feeling');
     }
 
+    public function searchEmojis(Request $request)
+    {
+        $request->validate([
+            's' => 'string|nullable'
+        ]);
+        if(empty($request->s)) {
+            $lang = app()->getLocale();
+            $data = Emoji::select('id', 'css_class', 'color', 'type_' . $lang . ' as type')->orderBy('raw_order')->get();
+        }else {
+            $lang = app()->getLocale();
+            $data = Emoji::select('id', 'css_class', 'color', 'type_' . $lang . ' as type')->where('type_' . $lang, 'LIKE', "%$request->s%")->orderBy('raw_order')->get();
+        }
+
+        return $data;
+    }
+
 }

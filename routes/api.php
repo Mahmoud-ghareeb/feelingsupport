@@ -49,6 +49,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('read-all', [ApiController::class, 'reaAllNotification']);
     Route::post('read-notification/{noti_id}', [ApiController::class, 'readSingleNotification']);
 
+    Route::get('/search-emojis', [ApiController::class, 'searchEmojis']);
+
     Route::post('clear-all', [ApiController::class, 'clearAllNotification']);
     Route::get('notification/count', [ApiController::class, 'getNotificationsCount']);
 
