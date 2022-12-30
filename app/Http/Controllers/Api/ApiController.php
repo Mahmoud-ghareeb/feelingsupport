@@ -1122,6 +1122,7 @@ class ApiController extends Controller
         $request->validate([
             's' => 'string|nullable',
             'lang' => 'string'
+            
         ]);
         if(empty($request->s)) {
             $lang = $request->lang ?? 'en';
