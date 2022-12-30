@@ -1124,7 +1124,7 @@ class ApiController extends Controller
             'lang' => 'string'
         ]);
         if(empty($request->s)) {
-            $lang = $request->lang;
+            $lang = $request->lang ?? 'en';
             $data = Emoji::select('id', 'css_class', 'color', 'type_' . $lang . ' as type')->orderBy('raw_order')->get();
         }else {
             $lang = app()->getLocale();
