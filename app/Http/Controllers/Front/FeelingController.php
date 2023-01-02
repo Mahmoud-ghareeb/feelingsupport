@@ -426,7 +426,7 @@ class FeelingController extends Controller
         $feel = Feeling::findOrFail($id);
         $this->authorize('delete', $feel);
         $feel->delete();
-        return redirect()->to(route('feeling.feels'))->with('success', 'Your Note Has Been Deleted Successfully');
+        return redirect()->to(route('feeling.feels'))->with('success', __('messages.Your Note Has Been Deleted Successfully'));
     }
 
     public function uploadBaseImage(Request $request)
