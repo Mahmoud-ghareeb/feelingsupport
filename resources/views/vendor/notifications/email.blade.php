@@ -46,7 +46,7 @@
 {{-- Subcopy --}}
 @isset($actionText)
 @slot('subcopy')
-@lang("If you're having trouble clicking the ")
+@lang("If you're having trouble clicking the")
 @lang(" ")
 @lang(":actionText",
     [
@@ -56,3 +56,4 @@
 @endslot
 @endisset
 @endcomponent
+
