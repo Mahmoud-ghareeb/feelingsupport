@@ -355,7 +355,9 @@ class FeelingController extends Controller
             break;
 
             case __('messages.save and share'): 
-                return redirect()->route('feeling.share', [$user_name, $data->id]);
+                $data->type = 1;
+                $data->save();
+                return redirect()->route('feeling.feels');
             break;
         }
     }
