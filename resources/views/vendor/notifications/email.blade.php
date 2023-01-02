@@ -52,8 +52,8 @@
     [
         'actionText' => $actionText,
     ])
+@lang(" ")
 @lang("button, copy and paste the URL below \n into your web browser:")<span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
 @endslot
 @endisset
 @endcomponent
-
