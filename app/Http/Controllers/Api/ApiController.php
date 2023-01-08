@@ -1128,7 +1128,7 @@ class ApiController extends Controller
             $data = Emoji::select('id', 'css_class', 'color', 'type_' . $lang . ' as type')->orderBy('raw_order')->get();
         }else {
             $lang = $request->lang;
-            $data = Emoji::select('id', 'css_class', 'color', 'type_' . $lang . ' as type')->where('type', 'LIKE', "%$request->s%")->orderBy('raw_order')->get();
+            $data = Emoji::select('id', 'css_class', 'color', 'type_' . $lang . ' as type')->where('type_' . $lang, 'LIKE', "%$request->s%")->orderBy('raw_order')->get();
         }
 
         return $data;
