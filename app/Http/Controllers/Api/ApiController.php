@@ -1127,11 +1127,11 @@ class ApiController extends Controller
             $lang = $request->lang ?? 'en';
             $data = Emoji::select('id', 'css_class', 'color', 'type_' . $lang . ' as type')->orderBy('raw_order')->get();
         }else {
-            $lang = app()->getLocale();
+            $lang = $request->lang;
             $data = Emoji::select('id', 'css_class', 'color', 'type_' . $lang . ' as type')->where('type_' . $lang, 'LIKE', "%$request->s%")->orderBy('raw_order')->get();
         }
 
-        return $lang;
+        return $data;
     }
 
 }
